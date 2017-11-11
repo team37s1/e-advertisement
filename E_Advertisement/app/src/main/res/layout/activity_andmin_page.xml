@@ -4,12 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.a37_1.e_advertisement.Andmin_page">
+    tools:context="com.example.a37_1.e_advertisement.Admin_page">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="33dp">
 
         <EditText
             android:id="@+id/ettitle"
@@ -19,30 +21,40 @@
             android:layout_marginRight="15dp"
             android:layout_marginTop="15dp"
             android:ems="10"
-            android:inputType="textPersonName"
-            android:text="Заголовок" />
-
-        <EditText
-            android:id="@+id/etCategory"
-            android:layout_width="match_parent"
+            android:hint="Заголовок"
+            android:inputType="textPersonName" />
+        <TextView
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:textSize="20dp"
+            android:text="Район:"
+            android:layout_marginLeft="15dp"
+            />
+        <Spinner
+            android:id="@+id/sArea"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
             android:layout_marginTop="15dp"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:text="Категорія" />
-
-        <EditText
-            android:id="@+id/etArea"
-            android:layout_width="match_parent"
+            android:spinnerMode="dialog"/>
+        <TextView
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:textSize="20dp"
+            android:text="Категорія:"
+            android:layout_marginLeft="15dp"
+            />
+        <Spinner
+            android:id="@+id/sCategory"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
             android:layout_marginTop="15dp"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:text="Район" />
+            android:spinnerMode="dialog" />
 
         <EditText
             android:id="@+id/etContent"
@@ -52,12 +64,14 @@
             android:layout_marginRight="15dp"
             android:layout_marginTop="15dp"
             android:ems="10"
+            android:hint="Опис"
             android:inputType="textMultiLine" />
 
         <ImageView
             android:id="@+id/addPhoto"
             android:layout_width="86dp"
             android:layout_height="81dp"
+            android:layout_marginLeft="15dp"
             app:srcCompat="@drawable/plus" />
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>
