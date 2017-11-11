@@ -20,7 +20,7 @@
     <include layout="@layout/content_main_screen" />
 
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
+        android:id="@+id/addNews"
         android:layout_width="59dp"
         android:layout_height="51dp"
         android:layout_gravity="bottom|end"

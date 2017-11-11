@@ -7,11 +7,10 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.Toast;
-
 import java.util.ArrayList;
 import java.util.List;
 
-public class Admin_page extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+public class Admin_page extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,12 +19,12 @@ public class Admin_page extends AppCompatActivity implements AdapterView.OnItemS
         Spinner sArea = (Spinner) findViewById(R.id.sArea);
         Spinner sCategory = (Spinner) findViewById(R.id.sCategory);
 
-
         // Spinner click listener
         sArea.setOnItemSelectedListener(this);
         sCategory.setOnItemSelectedListener(this);
 
         // Spinner Drop down elements
+
 
 
         List<String> area = new ArrayList<String>();
@@ -41,15 +40,15 @@ public class Admin_page extends AppCompatActivity implements AdapterView.OnItemS
         category.add("Електроенергія");
         category.add("Газопостачання");
         category.add("Водопостачання");
-       category.add("Рух громадського транспорту");
+        category.add("Рух громадського транспорту");
         category.add("Перекриття вулиць");
         category.add("Штормові попередження");
         category.add("Виберіть категорію");
-        
+
 
         // Creating adapter for spinner
-        ArrayAdapter<String> dataAdapter = new ArrayAdapter <String>(this, android.R.layout.simple_spinner_dropdown_item, area);
-        ArrayAdapter<String> dataCategory = new ArrayAdapter <String>(this, android.R.layout.simple_spinner_dropdown_item, category);
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, area);
+        ArrayAdapter<String> dataCategory = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, category);
 
         // Drop down layout style - list view with radio button
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -73,8 +72,8 @@ public class Admin_page extends AppCompatActivity implements AdapterView.OnItemS
         Toast.makeText(parent.getContext(), "Selected: " + item, Toast.LENGTH_LONG).show();
 
     }
-@Override
-    public void onNothingSelected(AdapterView<?>arg0) {
-        Toast.makeText(getApplicationContext(), "Please enter something !",Toast.LENGTH_LONG).show();
+
+    @Override
+    public void onNothingSelected(AdapterView<?> arg0) {
     }
 }
