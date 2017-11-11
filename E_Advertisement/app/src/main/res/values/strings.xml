@@ -6,4 +6,13 @@
     <string name="title_activity_main_screen">Main_screen</string>
     <string name="lorem_ip">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc magna tortor, pharetra vitae eros at, pulvinar volutpat diam. Cras tristique quam ut mattis dictum. Nulla maximus odio purus, sed convallis massa volutpat a.</string>
     <string name="Category">Категорія</string>
+    <string name="open">Open</string>
+    <string name="close">Close</string>
+    <string name="main">Main</string>
+    <string name="gaz">Gaz</string>
+    <string name="voda">Voda</string>
+    <string name="elektruka">Elektruka</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

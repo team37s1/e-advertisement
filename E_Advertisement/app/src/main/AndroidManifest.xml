@@ -13,14 +13,15 @@
         <activity
             android:name=".Main_screen"
             android:label="@string/title_activity_main_screen"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".Admin_page" />
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Admin_page"></activity>
     </application>
 
 </manifest>
