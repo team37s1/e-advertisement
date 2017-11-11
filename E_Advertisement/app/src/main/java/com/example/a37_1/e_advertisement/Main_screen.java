@@ -15,24 +15,31 @@ public class Main_screen extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        TableRow news1;
+        TableRow news2;
+        TableRow news3;
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_screen);
+        news1 = (TableRow) findViewById(R.id.news1);
+        news1.setOnClickListener(buttonClickListener);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+        news1 = (TableRow) findViewById(R.id.news2);
+        news1.setOnClickListener(buttonClickListener);
+
+        news1 = (TableRow) findViewById(R.id.news3);
+        news1.setOnClickListener(buttonClickListener);
     }
-    public void onClick(View v){
 
-        Intent intent=new Intent(v.getContext(),DescriptionNewActivity.class);
-        startActivityForResult(intent,0);
+    View.OnClickListener buttonClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v){
+            Intent intent=new Intent(v.getContext(),DescriptionNewActivity.class);
+            startActivityForResult(intent,0);
 
-    }
+        }
+    };
+
 }
 
 
