@@ -6,72 +6,74 @@
     android:layout_height="match_parent"
     tools:context="com.example.a37_1.e_advertisement.Admin_page">
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
         tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="33dp">
+        tools:layout_editor_absoluteY="162dp">
 
-        <EditText
-            android:id="@+id/ettitle"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
-            android:layout_marginTop="15dp"
-            android:ems="10"
-            android:hint="Заголовок"
-            android:inputType="textPersonName" />
-        <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:textSize="20dp"
-            android:text="Район:"
-            android:layout_marginLeft="15dp"
-            />
-        <Spinner
-            android:id="@+id/sArea"
-            android:layout_width="match_parent"
-            android:layout_height="56dp"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
-            android:layout_marginTop="15dp"
-            android:spinnerMode="dialog"/>
-        <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:textSize="20dp"
-            android:text="Категорія:"
-            android:layout_marginLeft="15dp"
-            />
-        <Spinner
-            android:id="@+id/sCategory"
-            android:layout_width="match_parent"
-            android:layout_height="56dp"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
-            android:layout_marginTop="15dp"
-            android:spinnerMode="dialog" />
+            android:orientation="vertical">
 
-        <EditText
-            android:id="@+id/etContent"
-            android:layout_width="match_parent"
-            android:layout_height="188dp"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
-            android:layout_marginTop="15dp"
-            android:ems="10"
-            android:hint="Опис"
-            android:inputType="textMultiLine" />
+            <EditText
+                android:id="@+id/ettitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="15dp"
+                android:ems="10"
+                android:hint="Заголовок"
+                android:inputType="textPersonName" />
 
-        <ImageView
-            android:id="@+id/addPhoto"
-            android:layout_width="86dp"
-            android:layout_height="81dp"
-            android:layout_marginLeft="15dp"
-            app:srcCompat="@drawable/plus" />
-    </LinearLayout>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="10dp"
+                android:text="Район:"
+                android:textSize="20dp" />
+
+            <Spinner
+                android:id="@+id/sArea"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="15dp"
+                android:spinnerMode="dialog" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="10dp"
+                android:text="Категорія:"
+                android:textSize="20dp" />
+
+            <Spinner
+                android:id="@+id/sCategory"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="15dp"
+                android:spinnerMode="dialog" />
+
+            <EditText
+                android:id="@+id/etContent"
+                android:layout_width="match_parent"
+                android:layout_height="188dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="15dp"
+                android:ems="10"
+                android:hint="Опис"
+                android:inputType="textMultiLine" />
+
+        </LinearLayout>
+    </ScrollView>
+
 </android.support.constraint.ConstraintLayout>
