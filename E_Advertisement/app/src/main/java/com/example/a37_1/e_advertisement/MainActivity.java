@@ -15,6 +15,7 @@ import android.view.MenuItem;
 import android.support.v4.app.Fragment;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TableRow;
 
 public class MainActivity extends AppCompatActivity
 implements FirstFragment.OnFragmentInteractionListener,
@@ -31,12 +32,19 @@ implements FirstFragment.OnFragmentInteractionListener,
     // android.support.v4.app.ActionBarDrawerToggle устарел.
 
     private ActionBarDrawerToggle drawerToggle;
-
+    TableRow news1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        news1 = (TableRow) findViewById(R.id.news1);
+        news1.setOnClickListener(viewContent);
 
+        news1 = (TableRow) findViewById(R.id.news2);
+        news1.setOnClickListener(viewContent);
+
+        news1 = (TableRow) findViewById(R.id.news3);
+        news1.setOnClickListener(viewContent);
         // Установить Toolbar для замены ActionBar'а.
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -164,4 +172,13 @@ implements FirstFragment.OnFragmentInteractionListener,
     public void onFragmentInteraction(Uri uri){
         //you can leave it empty
     }
+
+    View.OnClickListener viewContent = new View.OnClickListener() {
+        @Override
+        public void onClick(View v){
+            Intent intent=new Intent(v.getContext(),DescriptionNewActivity.class);
+            startActivityForResult(intent,0);
+
+        }
+    };
 }

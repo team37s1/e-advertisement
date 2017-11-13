@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     tools:context="com.example.a37_1.e_advertisement.DescriptionNewActivity">
 
+
     <TextView
         android:id="@+id/headerText"
         android:layout_width="344dp"
