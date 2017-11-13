@@ -12,12 +12,12 @@ import android.view.ViewGroup;
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link Third.OnFragmentInteractionListener} interface
+ * {@link ThirdFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link Third#newInstance} factory method to
+ * Use the {@link ThirdFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class Third extends Fragment {
+public class ThirdFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -29,7 +29,7 @@ public class Third extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
-    public Third() {
+    public ThirdFragment() {
         // Required empty public constructor
     }
 
@@ -39,11 +39,11 @@ public class Third extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment Third.
+     * @return A new instance of fragment ThirdFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static Third newInstance(String param1, String param2) {
-        Third fragment = new Third();
+    public static ThirdFragment newInstance(String param1, String param2) {
+        ThirdFragment fragment = new ThirdFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);

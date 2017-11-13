@@ -1,59 +1,155 @@
 package com.example.a37_1.e_advertisement;
 
-import android.content.Intent;
-import android.support.design.widget.FloatingActionButton;
+import android.content.res.Configuration;
+import android.support.design.widget.NavigationView;
+import android.support.v4.app.FragmentManager;
+
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.support.v4.app.Fragment;
 import android.view.View;
-import android.widget.TableRow;
+import android.widget.ImageView;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity{
+    private DrawerLayout mDrawer;
+    private Toolbar toolbar;
+    private NavigationView nvDrawer;
 
-    private DrawerLayout mDrawerLayout;
-    private ActionBarDrawerToggle mToggle;
+    // Убедитесь, что используется версия
+    // android.support.v7.app.ActionBarDrawerToggle.
 
+    // android.support.v4.app.ActionBarDrawerToggle устарел.
 
-
+    private ActionBarDrawerToggle drawerToggle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        TableRow news1;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        news1 = (TableRow) findViewById(R.id.news1);
-        news1.setOnClickListener(viewContent);
 
-        news1 = (TableRow) findViewById(R.id.news2);
-        news1.setOnClickListener(viewContent);
+        // Установить Toolbar для замены ActionBar'а.
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
-        news1 = (TableRow) findViewById(R.id.news3);
-        news1.setOnClickListener(viewContent);
+        // Найти наш view drawer'а
+        mDrawer = (DrawerLayout) findViewById(R.id.drawer_layout);
 
-        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer);
-        mToggle = new ActionBarDrawerToggle(MainActivity.this,mDrawerLayout,R.string.open,R.string.close);
-        mDrawerLayout.addDrawerListener(mToggle);
-        mToggle.syncState();
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        // Найти наш view drawer'а
+        nvDrawer = (NavigationView) findViewById(R.id.nvView);
+        // Настроить view drawer'а
+        setupDrawerContent(nvDrawer);
+
+        // Поиск navigation view
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nvView);
+        // Раздуть header view во время выполнения
+        View headerLayout = navigationView.getHeaderView(0);
+        // Теперь, при необходимости, мы можем найти элементы внутри
+        // header'а
+        ImageView ivHeaderPhoto = headerLayout.findViewById(R.id.imageView);
+
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        // Найти наш view drawer'а
+
+        mDrawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawerToggle = setupDrawerToggle();
+
+        // Привязать события DrawerLayout'а к ActionBarToggle
+        mDrawer.addDrawerListener(drawerToggle);
+
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-
-        if (mToggle.onOptionsItemSelected(item)){
+        if (drawerToggle.onOptionsItemSelected(item)) {
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
-    View.OnClickListener viewContent = new View.OnClickListener() {
-        @Override
-        public void onClick(View v){
-            Intent intent=new Intent(v.getContext(),DescriptionNewActivity.class);
-            startActivityForResult(intent,0);
 
+    private void setupDrawerContent(NavigationView navigationView) {
+        navigationView.setNavigationItemSelectedListener(
+                new NavigationView.OnNavigationItemSelectedListener() {
+                    @Override
+                    public boolean onNavigationItemSelected(MenuItem menuItem) {
+                        selectDrawerItem(menuItem);
+                        return true;
+                    }
+                });
+    }
+
+    public void selectDrawerItem(MenuItem menuItem) {
+        // Создать новый фрагмент и задать фрагмент для отображения
+        // на основе нажатия на элемент навигации
+        Fragment fragment = null;
+        Class fragmentClass;
+        switch(menuItem.getItemId()) {
+            case R.id.main:
+                fragmentClass = FirstFragment.class;
+                break;
+            case R.id.gaz:
+                fragmentClass = SecondFragment.class;
+                break;
+            case R.id.voda:
+                fragmentClass = ThirdFragment.class;
+                break;
+            case R.id.elektruka:
+                fragmentClass = FourthFragment.class;
+                break;
+            default:
+                fragmentClass = FirstFragment.class;
         }
-    };
+
+        try {
+            fragment = (Fragment) fragmentClass.newInstance();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        // Вставить фрагмент, заменяя любой существующий
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction().replace(R.id.flContent, fragment).commit();
+
+        // Выделение существующего элемента выполнено с помощью
+        // NavigationView
+        menuItem.setChecked(true);
+        // Установить заголовок для action bar'а
+        setTitle(menuItem.getTitle());
+        // Закрыть navigation drawer
+        mDrawer.closeDrawers();
+    }
+
+    private ActionBarDrawerToggle setupDrawerToggle() {
+        // Примечание: Убедитесь, что вы передаёте допустимую ссылку
+        // на toolbar
+        // ActionBarDrawToggle() не предусматривает в ней
+        // необходимости и не будет отображать иконку гамбургера без
+        // неё
+        return new ActionBarDrawerToggle(this, mDrawer, toolbar, R.string.drawer_open,  R.string.drawer_close);
+    }
+
+    // Есть две сигнатуры и только `onPostCreate(Bundle state)`
+    // показывает иконку гамбургера.
+    @Override
+    protected void onPostCreate(Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+        // Синхронизировать состояние переключения после того, как
+        // возникнет onRestoreInstanceState
+        drawerToggle.syncState();
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        // Передать любые изменения конфигурации переключателям
+        // drawer'а
+        drawerToggle.onConfigurationChanged(newConfig);
+    }
+
+
 }
