@@ -1,6 +1,7 @@
 package com.example.a37_1.e_advertisement;
 
 import android.content.res.Configuration;
+import android.net.Uri;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentManager;
 
@@ -14,7 +15,11 @@ import android.support.v4.app.Fragment;
 import android.view.View;
 import android.widget.ImageView;
 
-public class MainActivity extends AppCompatActivity{
+public class MainActivity extends AppCompatActivity
+implements FirstFragment.OnFragmentInteractionListener,
+            SecondFragment.OnFragmentInteractionListener,
+            ThirdFragment.OnFragmentInteractionListener,
+            FourthFragment.OnFragmentInteractionListener{
     private DrawerLayout mDrawer;
     private Toolbar toolbar;
     private NavigationView nvDrawer;
@@ -150,6 +155,8 @@ public class MainActivity extends AppCompatActivity{
         // drawer'а
         drawerToggle.onConfigurationChanged(newConfig);
     }
-
-
+    @Override
+    public void onFragmentInteraction(Uri uri){
+        //you can leave it empty
+    }
 }
