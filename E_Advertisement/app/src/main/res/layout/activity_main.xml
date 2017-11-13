@@ -12,17 +12,34 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
+
         <!-- ActionBar отображается сверху -->
         <include
             layout="@layout/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
+
         <!-- Основной контентный view, куда загружаются фрагменты -->
         <FrameLayout
             android:id="@+id/flContent"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent" >
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Main Activity"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginEnd="8dp"
+                android:textSize="25sp"
+                android:textAlignment="center"
+                android:layout_marginLeft="8dp"
+                android:textStyle="bold"
+                android:layout_marginRight="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp" />
+        </FrameLayout>
+
     </LinearLayout>
 
     <!-- navigation drawer, который появляется слева -->

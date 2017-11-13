@@ -1,5 +1,6 @@
 package com.example.a37_1.e_advertisement;
 
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.net.Uri;
 import android.support.design.widget.NavigationView;
@@ -106,6 +107,10 @@ implements FirstFragment.OnFragmentInteractionListener,
             case R.id.elektruka:
                 fragmentClass = FourthFragment.class;
                 break;
+            case R.id.settings:
+                Intent intent = new Intent(MainActivity.this, Admin_page.class);
+                startActivity(intent);
+                finish();
             default:
                 fragmentClass = FirstFragment.class;
         }

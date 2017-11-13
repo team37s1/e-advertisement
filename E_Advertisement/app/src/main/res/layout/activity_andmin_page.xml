@@ -72,7 +72,6 @@
                 android:ems="10"
                 android:hint="Опис"
                 android:inputType="textMultiLine" />
-
         </LinearLayout>
     </ScrollView>
 
