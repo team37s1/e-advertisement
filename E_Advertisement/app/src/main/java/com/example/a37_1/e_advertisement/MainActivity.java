@@ -37,20 +37,11 @@ implements FirstFragment.OnFragmentInteractionListener,
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        news1 = (TableRow) findViewById(R.id.news1);
-        news1.setOnClickListener(viewContent);
-
-        news1 = (TableRow) findViewById(R.id.news2);
-        news1.setOnClickListener(viewContent);
-
-        news1 = (TableRow) findViewById(R.id.news3);
-        news1.setOnClickListener(viewContent);
+        openFragment();
+//
         // Установить Toolbar для замены ActionBar'а.
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-        // Найти наш view drawer'а
-        mDrawer = (DrawerLayout) findViewById(R.id.drawer_layout);
 
         // Найти наш view drawer'а
         nvDrawer = (NavigationView) findViewById(R.id.nvView);
@@ -75,6 +66,24 @@ implements FirstFragment.OnFragmentInteractionListener,
 
         // Привязать события DrawerLayout'а к ActionBarToggle
         mDrawer.addDrawerListener(drawerToggle);
+
+
+
+    }
+
+    private void openFragment() {
+        Fragment fragment = null;
+        Class fragmentClass;
+        fragmentClass = FirstFragment.class;
+        try {
+            fragment = (Fragment) fragmentClass.newInstance();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction().replace(R.id.flContent, fragment).commit();
+
 
     }
 
@@ -118,7 +127,6 @@ implements FirstFragment.OnFragmentInteractionListener,
             case R.id.settings:
                 Intent intent = new Intent(MainActivity.this, Admin_page.class);
                 startActivity(intent);
-                finish();
             default:
                 fragmentClass = FirstFragment.class;
         }

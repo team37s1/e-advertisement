@@ -26,10 +26,6 @@
             android:id="@+id/flContent"
             android:layout_width="match_parent"
             android:layout_height="match_parent" >
-            <include
-                layout="@layout/content_main_screen"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
 
         </FrameLayout>
 
