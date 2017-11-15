@@ -2,22 +2,44 @@ package com.example.a37_1.e_advertisement;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
+
+import com.example.a37_1.e_advertisement.model.News;
+
+import java.io.Console;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.realm.Realm;
+import io.realm.RealmConfiguration;
+
 
 public class Admin_page extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
-        @Override
+    Button btnSend;
+    Spinner sArea;
+    Spinner sCategory;
+    Realm realm;
+    EditText title;
+    EditText content;
+
+
+    @Override
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_andmin_page);
-            Spinner sArea = (Spinner) findViewById(R.id.sArea);
-            Spinner sCategory = (Spinner) findViewById(R.id.sCategory);
+            sArea = (Spinner) findViewById(R.id.sArea);
+            sCategory = (Spinner) findViewById(R.id.sCategory);
+            realm = Realm.getDefaultInstance();
+            title = findViewById(R.id.ettitle);
+            content = findViewById(R.id.etContent);
+            btnSend = findViewById(R.id.addNews);
 
             // Spinner click listener
             sArea.setOnItemSelectedListener(this);
@@ -55,8 +77,35 @@ public class Admin_page extends AppCompatActivity implements AdapterView.OnItemS
             sCategory.setAdapter(dataCategory);
             sArea.setSelection(6);
             sCategory.setSelection(6);
+
+            btnSend.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    save_do_db(title.getText().toString().trim(), content.getText().toString().trim());
+                }
+            });
         }
 
+    private void save_do_db(final String title, final String content) {
+        realm.executeTransactionAsync(new Realm.Transaction() {
+            @Override
+            public void execute(Realm bgRealm) {
+                News news = bgRealm.createObject(News.class);
+                news.setTitle(title);
+                news.setContent(content);
+            }
+        }, new Realm.Transaction.OnSuccess() {
+            @Override
+            public void onSuccess() {
+                Log.v("Successes", "Vse norm");
+            }
+        }, new Realm.Transaction.OnError() {
+            @Override
+            public void onError(Throwable error) {
+                Log.e("Ne och norm", error.getMessage());
+            }
+        });
+    }
 
 
     @Override
@@ -70,5 +119,10 @@ public class Admin_page extends AppCompatActivity implements AdapterView.OnItemS
     @Override
     public void onNothingSelected(AdapterView<?> arg0) {
 
+    }
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        realm.close();
     }
 }

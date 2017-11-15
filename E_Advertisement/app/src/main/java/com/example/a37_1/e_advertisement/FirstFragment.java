@@ -4,11 +4,12 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.ListFragment;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import io.realm.Realm;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -59,6 +60,7 @@ public class FirstFragment extends Fragment {
         return fragment;
     }
 
+    Realm realm;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -119,7 +121,6 @@ public class FirstFragment extends Fragment {
         void onFragmentInteraction(Uri uri);
 
     }
-
 
 
 }
