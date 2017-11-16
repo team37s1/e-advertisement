@@ -7,6 +7,8 @@ import io.realm.Realm;
 import io.realm.RealmConfiguration;
 
 public class E_aplication extends Application{
+    public static final String AUTH_URL = "http://" + BuildConfig.OBJECT_SERVER_IP + ":9080/auth";
+    public static final String REALM_URL = "realm://" + BuildConfig.OBJECT_SERVER_IP + ":9080/~/realmtasks";
     @Override
     public void onCreate() {
         super.onCreate();

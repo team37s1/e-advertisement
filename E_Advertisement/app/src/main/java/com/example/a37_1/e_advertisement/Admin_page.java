@@ -17,8 +17,10 @@ import java.io.Console;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.realm.DynamicRealmObject;
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
+import io.realm.RealmResults;
 
 
 public class Admin_page extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
@@ -90,7 +92,9 @@ public class Admin_page extends AppCompatActivity implements AdapterView.OnItemS
         realm.executeTransactionAsync(new Realm.Transaction() {
             @Override
             public void execute(Realm bgRealm) {
+
                 News news = bgRealm.createObject(News.class);
+
                 news.setTitle(title);
                 news.setContent(content);
             }
