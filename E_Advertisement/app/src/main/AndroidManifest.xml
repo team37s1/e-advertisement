@@ -9,9 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        android:name=".E_aplication">
-        <activity android:name=".DescriptionNewActivity" />
-        <activity android:name=".Admin_page"/>
+        android:name=".E_application">
+        <activity android:name=".DescriptionNewActivity"/>
+        <activity android:name=".Admin_page"
+            android:windowSoftInputMode="adjustResize"/>
 
         <activity android:name=".MainActivity">
             <intent-filter>

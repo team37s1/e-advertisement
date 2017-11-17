@@ -9,17 +9,12 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
-
 import com.example.a37_1.e_advertisement.model.News;
-
-import java.io.Console;
 import java.util.ArrayList;
 import java.util.List;
-
-import io.realm.DynamicRealmObject;
 import io.realm.Realm;
-import io.realm.RealmConfiguration;
 import io.realm.RealmResults;
 
 
@@ -30,8 +25,7 @@ public class Admin_page extends AppCompatActivity implements AdapterView.OnItemS
     Realm realm;
     EditText title;
     EditText content;
-
-
+    TextView txtView;
     @Override
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
@@ -42,10 +36,13 @@ public class Admin_page extends AppCompatActivity implements AdapterView.OnItemS
             title = findViewById(R.id.ettitle);
             content = findViewById(R.id.etContent);
             btnSend = findViewById(R.id.addNews);
+            txtView = findViewById(R.id.textView);
 
+            showNews();
             // Spinner click listener
             sArea.setOnItemSelectedListener(this);
             sCategory.setOnItemSelectedListener(this);
+
 
             List<String> area = new ArrayList<String>();
             area.add("Галицький");
@@ -84,12 +81,31 @@ public class Admin_page extends AppCompatActivity implements AdapterView.OnItemS
                 @Override
                 public void onClick(View view) {
                     save_do_db(title.getText().toString().trim(), content.getText().toString().trim());
+
                 }
             });
         }
 
+    private void showNews() {
+
+        String output = "";
+        RealmResults<News> result = realm.where(News.class).findAllAsync();
+        result.load();
+        for (News news:result){
+            output +=news.toString();
+        }
+        txtView.setText(output);
+    }
+
+
     private void save_do_db(final String title, final String content) {
+//        realm.beginTransaction(); // Persist unmanaged objects
+//        News news = realm.createObject(News.class);
+//        news.setTitle(title);
+//        news.setContent(content);
+//        realm.commitTransaction();
         realm.executeTransactionAsync(new Realm.Transaction() {
+
             @Override
             public void execute(Realm bgRealm) {
 
@@ -109,6 +125,7 @@ public class Admin_page extends AppCompatActivity implements AdapterView.OnItemS
                 Log.e("Ne och norm", error.getMessage());
             }
         });
+
     }
 
 
