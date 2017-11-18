@@ -3,19 +3,21 @@ package com.example.a37_1.e_advertisement.model;
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 
-/**
- * Created by User on 15.11.2017.
- */
+
 
 public class News extends RealmObject {
     private String title;
     private String content;
+//    private String area;
+//    private String category;
 
     @Override
     public String toString() {
         return "News{" +
                 "title='" + title + '\'' +
                 ", content='" + content + '\'' +
+//                ",area='"+ area +'\''+
+//                ",category'="+category +'\''+
                 '}';
     }
 
@@ -34,4 +36,19 @@ public class News extends RealmObject {
     public void setContent(String content) {
         this.content = content;
     }
+//    public String getArea(String area) {
+//        return area;
+//    }
+//
+//    public void setArea(String area) {
+//        this.area = area;
+//    }
+//
+//    public String getCategory(String category) {
+//        return category;
+//    }
+//
+//    public void setCategory(String category) {
+//        this.category = category;
+//    }
 }

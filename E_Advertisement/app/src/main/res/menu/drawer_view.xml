@@ -16,17 +16,11 @@
         android:title="@string/elektruka"
         android:icon="@drawable/flash"></item>
 
-    <item android:title="Other">
-        <menu>
-            <group android:checkableBehavior="single">
-                <item
-                    android:id="@+id/settings"
-                    android:icon="@drawable/settings_gears"
-                    android:title="Settings" />
-                <item
-                    android:icon="@drawable/notifications_button"
-                    android:title="Notifications" />
-            </group>
-        </menu>
-    </item>
+    <item
+        android:id="@+id/settings"
+        android:icon="@drawable/settings_gears"
+        android:title="Settings" />
+    <item
+        android:icon="@drawable/notifications_button"
+        android:title="Notifications" />
 </menu>

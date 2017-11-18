@@ -14,8 +14,19 @@ import android.widget.Toast;
 import com.example.a37_1.e_advertisement.model.News;
 import java.util.ArrayList;
 import java.util.List;
+
+import io.realm.ErrorCode;
+import io.realm.ObjectServerError;
 import io.realm.Realm;
 import io.realm.RealmResults;
+import io.realm.SyncConfiguration;
+import io.realm.SyncCredentials;
+import io.realm.SyncUser;
+
+import static android.os.Build.ID;
+import static android.provider.Telephony.Carriers.PASSWORD;
+import static com.example.a37_1.e_advertisement.E_application.AUTH_URL;
+import static com.example.a37_1.e_advertisement.E_application.REALM_URL;
 
 
 public class Admin_page extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
@@ -62,7 +73,7 @@ public class Admin_page extends AppCompatActivity implements AdapterView.OnItemS
             category.add("Штормові попередження");
             category.add("Виберіть категорію");
 
-
+            createUserIfNeededAndAndLogin();
             // Creating adapter for spinner
             ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, area);
             ArrayAdapter<String> dataCategory = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, category);
@@ -146,4 +157,31 @@ public class Admin_page extends AppCompatActivity implements AdapterView.OnItemS
         super.onDestroy();
         realm.close();
     }
+
+
+    private void createUserIfNeededAndAndLogin() {
+        final SyncCredentials syncCredentials = SyncCredentials.usernamePassword(ID, PASSWORD, false);
+
+        // Assume user exist already first time. If that fails, create it.
+        SyncUser.loginAsync(syncCredentials, AUTH_URL, new SyncUser.Callback<SyncUser>() {
+            @Override
+            public void onSuccess(SyncUser user) {
+                final SyncConfiguration syncConfiguration = new SyncConfiguration.Builder(user, REALM_URL).build();
+                Realm.setDefaultConfiguration(syncConfiguration);
+                realm = Realm.getDefaultInstance();
+            }
+
+            @Override
+            public void onError(ObjectServerError error) {
+                if (error.getErrorCode() == ErrorCode.INVALID_CREDENTIALS) {
+                    // User did not exist, create it
+                    SyncUser.loginAsync(SyncCredentials.usernamePassword(ID, PASSWORD, true), AUTH_URL, this);
+                } else {
+                    String errorMsg = String.format("(%s) %s", error.getErrorCode(), error.getErrorMessage());
+                    Toast.makeText(getApplicationContext(), errorMsg, Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+    }
 }
+

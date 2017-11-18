@@ -25,6 +25,9 @@ android {
             buildConfigField "String", "OBJECT_SERVER_IP", "\"${host}\""
         }
     }
+    realm {
+        syncEnabled = true
+    }
 }
 
 dependencies {
