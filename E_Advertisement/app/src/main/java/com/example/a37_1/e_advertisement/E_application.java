@@ -8,7 +8,7 @@ import io.realm.RealmConfiguration;
 
 public class E_application extends Application{
     public static final String AUTH_URL = "http://" + BuildConfig.OBJECT_SERVER_IP + ":9080/auth";
-    public static final String REALM_URL = "realm://" + BuildConfig.OBJECT_SERVER_IP + ":9080/~/e_advertisement";
+    public static final String REALM_URL = "realm://" + BuildConfig.OBJECT_SERVER_IP + ":9080/~/37_1";
     @Override
     public void onCreate() {
         super.onCreate();
