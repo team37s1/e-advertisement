@@ -88,23 +88,7 @@ public class SecondFragment extends Fragment {
             output +=news.toString();
         }
         txtView.setText(output);
-
-//        btn.setOnClickListener(new View.OnClickListener() {
-//            public void onClick(View v) {
-//                showNews();
-//            }
-//        });
         return root;
-    }
-    protected void showNews() {
-
-        String output = "";
-        RealmResults<News> result = realm.where(News.class).findAllAsync();
-        result.load();
-        for (News news:result){
-            output +=news.toString();
-        }
-        txtView.setText(output);
     }
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
