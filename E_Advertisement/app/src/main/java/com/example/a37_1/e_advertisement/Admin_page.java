@@ -72,11 +72,23 @@ public class Admin_page extends AppCompatActivity implements AdapterView.OnItemS
             category.add("Перекриття вулиць");
             category.add("Штормові попередження");
             category.add("Виберіть категорію");
+        final int categorySize = category.size() - 1;
+        final int areaSize = area.size() - 1;
 
             createUserIfNeededAndAndLogin();
             // Creating adapter for spinner
-            ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, area);
-            ArrayAdapter<String> dataCategory = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, category);
+            ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, area){
+                @Override
+                public int getCount() {
+                    return(areaSize); // Truncate the list
+                }
+            };
+            ArrayAdapter<String> dataCategory = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, category){
+                @Override
+                public int getCount() {
+                    return(categorySize); // Truncate the list
+                }
+            };
 
             // Drop down layout style - list view with radio button
             dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -85,13 +97,18 @@ public class Admin_page extends AppCompatActivity implements AdapterView.OnItemS
             // attaching data adapter to spinner
             sArea.setAdapter(dataAdapter);
             sCategory.setAdapter(dataCategory);
-            sArea.setSelection(6);
-            sCategory.setSelection(6);
+            sArea.setSelection(areaSize);
+            sCategory.setSelection(categorySize);
 
             btnSend.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    save_do_db(title.getText().toString().trim(), content.getText().toString().trim());
+                   if( title.getText().toString().trim().equals("") || content.getText().toString().trim().equals("")){
+                       Toast.makeText(getApplicationContext(), "Заповніть всі поля", Toast.LENGTH_LONG).show();
+                   }
+                   else {
+                       save_do_db(title.getText().toString().trim(), content.getText().toString().trim());
+                   }
 
                 }
             });
@@ -151,6 +168,7 @@ public class Admin_page extends AppCompatActivity implements AdapterView.OnItemS
     @Override
     public void onNothingSelected(AdapterView<?> arg0) {
 
+
     }
     @Override
     protected void onDestroy() {
@@ -177,8 +195,7 @@ public class Admin_page extends AppCompatActivity implements AdapterView.OnItemS
                     // User did not exist, create it
                     SyncUser.loginAsync(SyncCredentials.usernamePassword(ID, PASSWORD, true), AUTH_URL, this);
                 } else {
-                    String errorMsg = String.format("(%s) %s", error.getErrorCode(), error.getErrorMessage());
-                    Toast.makeText(getApplicationContext(), errorMsg, Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "Вибачте, але зараз сервер не запущено: ", Toast.LENGTH_LONG).show();
                 }
             }
         });
