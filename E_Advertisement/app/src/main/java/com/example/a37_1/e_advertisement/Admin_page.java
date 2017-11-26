@@ -26,6 +26,7 @@ public class Admin_page extends AppCompatActivity implements AdapterView.OnItemS
     EditText title;
     EditText content;
     TextView txtView;
+    
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference myDb = database.getReference();
 
@@ -39,6 +40,8 @@ public class Admin_page extends AppCompatActivity implements AdapterView.OnItemS
             content = findViewById(R.id.etContent);
             btnSend = findViewById(R.id.addNews);
             txtView = findViewById(R.id.textView);
+
+        ArrayList<Object> mNews = new ArrayList<>();
 
             // Spinner click listener
              sArea.setOnItemSelectedListener(this);
@@ -87,7 +90,8 @@ public class Admin_page extends AppCompatActivity implements AdapterView.OnItemS
             sCategory.setAdapter(dataCategory);
             sArea.setSelection(areaSize);
             sCategory.setSelection(categorySize);
-            final int[] constant = {0};
+
+
             btnSend.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -108,8 +112,10 @@ public class Admin_page extends AppCompatActivity implements AdapterView.OnItemS
                        news.setCategory(categoryValue);
 
 
-                       myDb.child("advertisement_" + constant[0]).setValue(news);
-                       constant[0]++;
+                       myDb.push().setValue(news);
+
+                       title.setText("");
+                       content.setText("");
                    }
                 }
             });
