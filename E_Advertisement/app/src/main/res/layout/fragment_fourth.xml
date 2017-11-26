@@ -1,0 +1,22 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.a37_1.e_advertisement.FourthFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/hello_blank_fragment4"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginEnd="8dp"
+        android:textSize="25sp"
+        android:textAlignment="center"
+        android:layout_marginLeft="8dp"
+        android:textStyle="bold"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp" />
+
+</FrameLayout>
