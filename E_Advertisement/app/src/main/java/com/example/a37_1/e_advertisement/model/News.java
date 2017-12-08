@@ -11,15 +11,15 @@ public class News{
     public String area;
     public String category;
 
-    @Override
-    public String toString() {
-        return "News{" +
-                "title='" + title + '\'' +
-                ", content='" + content + '\'' +
-                ",area='"+ area +'\''+
-                ",category'="+category +'\''+
-                '}';
-    }
+//    @Override
+//    public String toString() {
+//        return "News{" +
+//                "title='" + title + '\'' +
+//                ", content='" + content + '\'' +
+//                ",area='"+ area +'\''+
+//                ",category'="+category +'\''+
+//                '}';
+//    }
     public News(){
 
     }

@@ -26,100 +26,98 @@ public class Admin_page extends AppCompatActivity implements AdapterView.OnItemS
     EditText title;
     EditText content;
     TextView txtView;
-    
+
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference myDb = database.getReference();
 
     @Override
-        protected void onCreate(Bundle savedInstanceState) {
-            super.onCreate(savedInstanceState);
-            setContentView(R.layout.activity_andmin_page);
-            sArea =  findViewById(R.id.sArea);
-            sCategory =  findViewById(R.id.sCategory);
-            title = findViewById(R.id.ettitle);
-            content = findViewById(R.id.etContent);
-            btnSend = findViewById(R.id.addNews);
-            txtView = findViewById(R.id.textView);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_andmin_page);
+        sArea =  findViewById(R.id.sArea);
+        sCategory =  findViewById(R.id.sCategory);
+        title = findViewById(R.id.ettitle);
+        content = findViewById(R.id.etContent);
+        btnSend = findViewById(R.id.addNews);
+        txtView = findViewById(R.id.textView);
 
         ArrayList<Object> mNews = new ArrayList<>();
 
-            // Spinner click listener
-             sArea.setOnItemSelectedListener(this);
-            sCategory.setOnItemSelectedListener(this);
+        // Spinner click listener
+        sArea.setOnItemSelectedListener(this);
+        sCategory.setOnItemSelectedListener(this);
 
-            final List<String> area = new ArrayList<>();
-            area.add("Галицький");
-            area.add("Франківський");
-            area.add("Сихівський");
-            area.add("Личаківський");
-            area.add("Залізничний");
-            area.add("Шевченківський");
-            area.add("Виберіть район");
+        final List<String> area = new ArrayList<>();
+        area.add("Галицький");
+        area.add("Франківський");
+        area.add("Сихівський");
+        area.add("Личаківський");
+        area.add("Залізничний");
+        area.add("Шевченківський");
+        area.add("Виберіть район");
 
-            List<String> category = new ArrayList<>();
-            category.add("Електроенергія");
-            category.add("Газопостачання");
-            category.add("Водопостачання");
-            category.add("Рух громадського транспорту");
-            category.add("Перекриття вулиць");
-            category.add("Штормові попередження");
-            category.add("Виберіть категорію");
-            final int categorySize = category.size() - 1;
-            final int areaSize = area.size() - 1;
+        List<String> category = new ArrayList<>();
+        category.add("Електроенергія");
+        category.add("Газопостачання");
+        category.add("Водопостачання");
+        category.add("Рух громадського транспорту");
+        category.add("Перекриття вулиць");
+        category.add("Штормові попередження");
+        category.add("Виберіть категорію");
+        final int categorySize = category.size() - 1;
+        final int areaSize = area.size() - 1;
 
-            // Creating adapter for spinner
-            ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, area){
-                @Override
-                public int getCount() {
-                    return(areaSize); // Truncate the list
+        // Creating adapter for spinner
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, area){
+            @Override
+            public int getCount() {
+                return(areaSize); // Truncate the list
+            }
+        };
+        ArrayAdapter<String> dataCategory = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, category){
+            @Override
+            public int getCount() {
+                return(categorySize); // Truncate the list
+            }
+        };
+
+        // Drop down layout style - list view with radio button
+        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        dataCategory.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        // attaching data adapter to spinner
+        sArea.setAdapter(dataAdapter);
+        sCategory.setAdapter(dataCategory);
+        sArea.setSelection(areaSize);
+        sCategory.setSelection(categorySize);
+
+
+        btnSend.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                if( title.getText().toString().trim().equals("") || content.getText().toString().trim().equals("")){
+                    Toast.makeText(getApplicationContext(), "Заповніть всі поля", Toast.LENGTH_LONG).show();
                 }
-            };
-            ArrayAdapter<String> dataCategory = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, category){
-                @Override
-                public int getCount() {
-                    return(categorySize); // Truncate the list
+                else {
+                    String titleValue = title.getText().toString().trim();
+                    String areaValue = sArea.getSelectedItem().toString();
+                    String categoryValue = sCategory.getSelectedItem().toString();
+                    String contentValue = content.getText().toString().trim();
+
+                    News news = new News();
+                    news.setTitle(titleValue);
+                    news.setContent(contentValue);
+                    news.setArea(areaValue);
+                    news.setCategory(categoryValue);
+
+                    myDb.push().setValue(news);
+                    title.setText("");
+                    content.setText("");
                 }
-            };
-
-            // Drop down layout style - list view with radio button
-            dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-            dataCategory.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
-            // attaching data adapter to spinner
-            sArea.setAdapter(dataAdapter);
-            sCategory.setAdapter(dataCategory);
-            sArea.setSelection(areaSize);
-            sCategory.setSelection(categorySize);
-
-
-            btnSend.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-
-                   if( title.getText().toString().trim().equals("") || content.getText().toString().trim().equals("")){
-                       Toast.makeText(getApplicationContext(), "Заповніть всі поля", Toast.LENGTH_LONG).show();
-                   }
-                   else {
-                       String titleValue = title.getText().toString().trim();
-                       String areaValue = sArea.getSelectedItem().toString();
-                       String categoryValue = sCategory.getSelectedItem().toString();
-                       String contentValue = content.getText().toString().trim();
-
-                       News news = new News();
-                       news.setTitle(titleValue);
-                       news.setContent(contentValue);
-                       news.setArea(areaValue);
-                       news.setCategory(categoryValue);
-
-
-                       myDb.push().setValue(news);
-
-                       title.setText("");
-                       content.setText("");
-                   }
-                }
-            });
-        }
+            }
+        });
+    }
 
 
 
@@ -146,4 +144,3 @@ public class Admin_page extends AppCompatActivity implements AdapterView.OnItemS
 
 
 }
-

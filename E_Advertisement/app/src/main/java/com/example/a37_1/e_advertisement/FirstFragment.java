@@ -79,7 +79,7 @@ public class FirstFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
         ViewGroup root = (ViewGroup) inflater.inflate(R.layout.fragment_first, null);
-        news1 = (TableRow) root.findViewById(R.id.news1);
+        news1 =  root.findViewById(R.id.news1);
         news1.setOnClickListener(viewContent);
 
         news1 = (TableRow) root.findViewById(R.id.news2);
