@@ -11,6 +11,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.a37_1.e_advertisement.model.News;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -89,11 +92,41 @@ public class SecondFragment extends Fragment {  // TODO: Rename parameter argume
         rvMain.setLayoutManager(llm);
         myAdapter = new RecViewAdapt(result);
         rvMain.setAdapter(myAdapter);
-        createResult();
+        updateList();
 
         return root;
     }
+    private void updateList(){
+        myDb.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                result.add(dataSnapshot.getValue(News.class));
+                myAdapter.notifyDataSetChanged();
+            }
 
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+                News news = dataSnapshot.getValue(News.class);
+
+
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+}
     private void createResult() {
         int i;
         for (i = 0; i < 10; i++) {

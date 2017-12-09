@@ -27,13 +27,13 @@ public class RecViewAdapt extends RecyclerView.Adapter<RecViewAdapt.RecViewHolde
 
         return new RecViewHolder(LayoutInflater
                 .from(parent.getContext())
-                .inflate(R.layout.fragment_second, parent, false));
+                .inflate(R.layout.view_item, parent, false));
     }
 
     @Override
     public void onBindViewHolder(RecViewHolder holder, int position) {
         News news = alist.get(position);
-        holder.title.setText(news.title);
+        holder.title.setText(news.content);
         holder.content.setText(news.content);
         holder.area.setText(news.area);
         holder.category.setText(news.category);
@@ -47,11 +47,12 @@ public class RecViewAdapt extends RecyclerView.Adapter<RecViewAdapt.RecViewHolde
     class RecViewHolder extends RecyclerView.ViewHolder {
         TextView title, content, area, category;
 
+        @SuppressLint("CutPasteId")
         public RecViewHolder(View itemView) {
             super(itemView);
 
             title = itemView.findViewById(R.id.RVtitle);
-            content = itemView.findViewById(R.id.RVcategory);
+            content = itemView.findViewById(R.id.RVcontent);
             area = itemView.findViewById(R.id.RVarea);
             category = itemView.findViewById(R.id.RVcategory);
         }
