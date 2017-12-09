@@ -10,25 +10,20 @@ public class News{
     public String content;
     public String area;
     public String category;
+    public String  key;
 
-//    @Override
-//    public String toString() {
-//        return "News{" +
-//                "title='" + title + '\'' +
-//                ", content='" + content + '\'' +
-//                ",area='"+ area +'\''+
-//                ",category'="+category +'\''+
-//                '}';
-//    }
+
     public News(){
 
     }
-    public News(String title, String content, String area, String category){
+    public News(String title, String content, String area, String category, String key){
         this.title = title;
         this.content = content;
         this.area = area;
         this.category = category;
+        this.key = key;
     }
+
     public String getTitle() {
         return title;
     }
@@ -44,7 +39,8 @@ public class News{
     public void setContent(String content) {
         this.content = content;
     }
-    public String getArea(String area) {
+
+    public String getArea() {
         return area;
     }
 
@@ -52,11 +48,19 @@ public class News{
         this.area = area;
     }
 
-    public String getCategory(String category) {
+    public String getCategory() {
         return category;
     }
 
     public void setCategory(String category) {
         this.category = category;
+    }
+
+    public String getKey() {
+        return key;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
     }
 }

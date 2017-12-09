@@ -41,11 +41,10 @@ public class SecondFragment extends Fragment {  // TODO: Rename parameter argume
     private RecViewAdapt myAdapter;
 
     private RecyclerView rvMain;
-    //И его адаптер
     private OnFragmentInteractionListener mListener;
 
     FirebaseDatabase database = FirebaseDatabase.getInstance();
-    DatabaseReference myDb = database.getReference();
+    DatabaseReference myDb = database.getReference("news");
 
     public SecondFragment() {
         // Required empty public constructor
@@ -107,13 +106,18 @@ public class SecondFragment extends Fragment {  // TODO: Rename parameter argume
             @Override
             public void onChildChanged(DataSnapshot dataSnapshot, String s) {
                 News news = dataSnapshot.getValue(News.class);
-
+                int index = indexGet(news);
+                result.set(index, news);
+                myAdapter.notifyItemChanged(index);
 
             }
 
             @Override
             public void onChildRemoved(DataSnapshot dataSnapshot) {
-
+                News news = dataSnapshot.getValue(News.class);
+                int index = indexGet(news);
+                result.remove(index);
+                myAdapter.notifyItemRemoved(index);
             }
 
             @Override
@@ -127,19 +131,19 @@ public class SecondFragment extends Fragment {  // TODO: Rename parameter argume
             }
         });
 }
-    private void createResult() {
-        int i;
-        for (i = 0; i < 10; i++) {
-            result.add(new News("title", "content", "area", "category"));
+
+
+    private int indexGet(News news) {
+        int index = -1;
+        for (int i = 0; i < result.size(); i++) {
+            if (result.get(i).key.equals(news.key)) {
+                index = 1;
+                break;
+            }
         }
+        return index;
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
-    }
 
     @Override
     public void onAttach(Context context) {

@@ -28,7 +28,7 @@ public class Admin_page extends AppCompatActivity implements AdapterView.OnItemS
     TextView txtView;
 
     FirebaseDatabase database = FirebaseDatabase.getInstance();
-    DatabaseReference myDb = database.getReference();
+    DatabaseReference myDb = database.getReference("news");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -119,10 +119,6 @@ public class Admin_page extends AppCompatActivity implements AdapterView.OnItemS
         });
     }
 
-
-
-
-
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         // On selecting a spinner item
@@ -135,12 +131,10 @@ public class Admin_page extends AppCompatActivity implements AdapterView.OnItemS
     @Override
     public void onNothingSelected(AdapterView<?> arg0) {
 
-
     }
     @Override
     protected void onDestroy() {
         super.onDestroy();
     }
-
 
 }
