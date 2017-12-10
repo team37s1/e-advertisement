@@ -33,7 +33,7 @@ public class RecViewAdapt extends RecyclerView.Adapter<RecViewAdapt.RecViewHolde
     @Override
     public void onBindViewHolder(RecViewHolder holder, int position) {
         News news = alist.get(position);
-        holder.title.setText(news.content);
+        holder.title.setText(news.title);
         holder.content.setText(news.content);
         holder.area.setText(news.area);
         holder.category.setText(news.category);
