@@ -23,4 +23,10 @@
     <item
         android:icon="@drawable/notifications_button"
         android:title="Notifications" />
+    <group>
+        <item android:id="@+id/logOut"
+            android:title="LogOut"
+            android:icon="@drawable/logout"></item>
+
+    </group>
 </menu>
