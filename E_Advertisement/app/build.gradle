@@ -45,3 +45,7 @@ dependencies {
     implementation 'com.android.support:gridlayout-v7:26.1.0'
 }
 apply plugin: 'com.google.gms.google-services'
+
+dependencies {
+    compile 'com.github.danylovolokh:hashtag-helper:1.1.0'
+}

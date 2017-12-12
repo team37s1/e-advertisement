@@ -13,6 +13,7 @@ public class News{
     public String  key;
 
 
+
     public News(){
 
     }

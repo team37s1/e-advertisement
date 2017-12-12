@@ -125,7 +125,7 @@ implements FirstFragment.OnFragmentInteractionListener,
                 fragmentClass = FourthFragment.class;
                 break;
             case R.id.settings:
-                Intent intent = new Intent(MainActivity.this, Admin_page.class);
+                Intent intent = new Intent(MainActivity.this, AdminPage.class);
                 startActivity(intent);
             default:
                 fragmentClass = FirstFragment.class;

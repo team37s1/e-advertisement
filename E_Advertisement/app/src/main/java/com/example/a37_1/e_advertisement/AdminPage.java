@@ -13,19 +13,22 @@ import android.widget.Toast;
 import com.example.a37_1.e_advertisement.model.News;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.volokh.danylo.hashtaghelper.HashTagHelper;
+
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 
-public class Admin_page extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
+public class AdminPage extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
     Button btnSend;
     Spinner sArea;
     Spinner sCategory;
     EditText title;
     EditText content;
     TextView txtView;
+    HashTagHelper mTextHashTagHelper;
+    TextView mHashTagText;
+
 
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference myDb = database.getReference("news");
@@ -40,6 +43,10 @@ public class Admin_page extends AppCompatActivity implements AdapterView.OnItemS
         content = findViewById(R.id.etContent);
         btnSend = findViewById(R.id.addNews);
         txtView = findViewById(R.id.textView);
+
+        mHashTagText = findViewById(R.id.etContent);
+        mTextHashTagHelper = HashTagHelper.Creator.create(getResources().getColor(R.color.colorPrimary), null);
+        mTextHashTagHelper.handle(mHashTagText);
 
         ArrayList<Object> mNews = new ArrayList<>();
 
