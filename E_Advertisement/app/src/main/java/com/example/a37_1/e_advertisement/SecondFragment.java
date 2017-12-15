@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +17,8 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -91,38 +94,20 @@ public class SecondFragment extends Fragment {  // TODO: Rename parameter argume
         rvMain.setLayoutManager(llm);
         myAdapter = new RecViewAdapt(result);
         rvMain.setAdapter(myAdapter);
-        updateList();
 
-        return root;
-    }
-    private void updateList(){
-        myDb.addChildEventListener(new ChildEventListener() {
+        Query query = myDb.orderByChild("category").equalTo("Газопостачання");
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                result.add(dataSnapshot.getValue(News.class));
-                myAdapter.notifyDataSetChanged();
-            }
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
 
-            @Override
-            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-                News news = dataSnapshot.getValue(News.class);
-                int index = indexGet(news);
-                result.set(index, news);
-                myAdapter.notifyItemChanged(index);
+                    for (DataSnapshot issue : dataSnapshot.getChildren()) {
+                        News news = issue.getValue(News.class);
+                        result.add(news);
+                        myAdapter.notifyDataSetChanged();
 
-            }
-
-            @Override
-            public void onChildRemoved(DataSnapshot dataSnapshot) {
-                News news = dataSnapshot.getValue(News.class);
-                int index = indexGet(news);
-                result.remove(index);
-                myAdapter.notifyItemRemoved(index);
-            }
-
-            @Override
-            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-
+                    }
+                }
             }
 
             @Override
@@ -130,19 +115,10 @@ public class SecondFragment extends Fragment {  // TODO: Rename parameter argume
 
             }
         });
-}
 
-
-    private int indexGet(News news) {
-        int index = -1;
-        for (int i = 0; i < result.size(); i++) {
-            if (result.get(i).key.equals(news.key)) {
-                index = 1;
-                break;
-            }
-        }
-        return index;
+        return root;
     }
+
 
 
     @Override
