@@ -6,6 +6,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +15,14 @@ import android.widget.TableRow;
 import android.widget.TextView;
 
 import com.example.a37_1.e_advertisement.model.News;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import io.realm.Realm;
 import io.realm.RealmResults;
@@ -40,7 +50,14 @@ public class FirstFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-    TableRow news1;
+
+    private List<News> result;
+    private RecViewAdapt myAdapter;
+
+    private RecyclerView rvMain;
+
+    FirebaseDatabase database = FirebaseDatabase.getInstance();
+    DatabaseReference myDb = database.getReference("news");
     private OnFragmentInteractionListener mListener;
 
     public FirstFragment() {
@@ -79,18 +96,67 @@ public class FirstFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
         ViewGroup root = (ViewGroup) inflater.inflate(R.layout.fragment_first, null);
-        news1 =  root.findViewById(R.id.news1);
-        news1.setOnClickListener(viewContent);
 
-        news1 = (TableRow) root.findViewById(R.id.news2);
-        news1.setOnClickListener(viewContent);
-
-        news1 = (TableRow) root.findViewById(R.id.news3);
-        news1.setOnClickListener(viewContent);
-
+        rvMain = root.findViewById(R.id.rv_news);
+        result = new ArrayList<>();
+        rvMain.setHasFixedSize(true);
+        LinearLayoutManager llm = new LinearLayoutManager(getActivity().getApplicationContext());
+        llm.setOrientation(LinearLayoutManager.VERTICAL);
+        rvMain.setLayoutManager(llm);
+        myAdapter = new RecViewAdapt(result);
+        rvMain.setAdapter(myAdapter);
+        updateList();
 
         return root;
     }
+
+    private void updateList(){
+        myDb.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                result.add(dataSnapshot.getValue(News.class));
+                myAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+                News news = dataSnapshot.getValue(News.class);
+                int index = indexGet(news);
+                result.set(index, news);
+                myAdapter.notifyItemChanged(index);
+
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+                News news = dataSnapshot.getValue(News.class);
+                int index = indexGet(news);
+                result.remove(index);
+                myAdapter.notifyItemRemoved(index);
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
+    private int indexGet(News news) {
+        int index = -1;
+        for (int i = 0; i < result.size(); i++) {
+            if (result.get(i).key.equals(news.key)) {
+                index = 1;
+                break;
+            }
+        }
+        return index;
+    }
+
     View.OnClickListener viewContent = new View.OnClickListener() {
         @Override
         public void onClick(View v){
