@@ -3,7 +3,9 @@ package com.example.a37_1.e_advertisement;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.net.Uri;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentManager;
 
 import android.support.v4.widget.DrawerLayout;
@@ -25,7 +27,7 @@ implements FirstFragment.OnFragmentInteractionListener,
     private DrawerLayout mDrawer;
     private Toolbar toolbar;
     private NavigationView nvDrawer;
-
+    private FloatingActionButton fab;
     // Убедитесь, что используется версия
     // android.support.v7.app.ActionBarDrawerToggle.
 
@@ -67,9 +69,16 @@ implements FirstFragment.OnFragmentInteractionListener,
         // Привязать события DrawerLayout'а к ActionBarToggle
         mDrawer.addDrawerListener(drawerToggle);
         //nvDrawer.setItemIconTintList(null);
-
+       fab =  findViewById(R.id.floatingActionButton);
+       fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this, AdminPage.class));
+            }
+        });
 
     }
+
 
     private void openFragment() {
         Fragment fragment = null;
