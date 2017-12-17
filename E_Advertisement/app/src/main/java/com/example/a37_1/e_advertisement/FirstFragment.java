@@ -5,14 +5,12 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TableRow;
-import android.widget.TextView;
 
 import com.example.a37_1.e_advertisement.model.News;
 import com.google.firebase.database.ChildEventListener;
@@ -24,9 +22,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.ArrayList;
 import java.util.List;
 
-import io.realm.Realm;
-import io.realm.RealmResults;
-
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
@@ -35,7 +30,8 @@ import io.realm.RealmResults;
  * Use the {@link FirstFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class FirstFragment extends Fragment {
+public class FirstFragment extends Fragment  {
+    SwipeRefreshLayout swipeLayout;
     OnHeadlineSelectedListener mCallback;
 
     // Container Activity must implement this interface
@@ -69,7 +65,7 @@ public class FirstFragment extends Fragment {
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
-     * @param param1 Parameter 1.
+     * @param param1 Parameter nav.
      * @param param2 Parameter 2.
      * @return A new instance of fragment FirstFragment.
      */
@@ -106,7 +102,7 @@ public class FirstFragment extends Fragment {
         myAdapter = new RecViewAdapt(result);
         rvMain.setAdapter(myAdapter);
         updateList();
-
+    
         return root;
     }
 

@@ -66,7 +66,7 @@ implements FirstFragment.OnFragmentInteractionListener,
 
         // Привязать события DrawerLayout'а к ActionBarToggle
         mDrawer.addDrawerListener(drawerToggle);
-
+        //nvDrawer.setItemIconTintList(null);
 
 
     }

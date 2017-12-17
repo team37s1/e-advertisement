@@ -16,11 +16,22 @@
         android:title="@string/elektruka"
         android:icon="@drawable/flash"></item>
 
-    <item
-        android:id="@+id/settings"
-        android:icon="@drawable/settings_gears"
-        android:title="Settings" />
-    <item
-        android:icon="@drawable/notifications_button"
-        android:title="Notifications" />
+    <item android:id="@+id/perekrutia"
+        android:title="@string/perekrutia"
+        android:icon="@drawable/road_perspective"></item>
+
+    <item android:id="@+id/wtorm"
+        android:title="@string/wtorm"
+        android:icon="@drawable/attention"></item>
+    <item android:title="Налаштування">
+        <menu>
+            <item
+                android:id="@+id/settings"
+                android:icon="@drawable/settings_gears"
+                android:title="Додавання новий" />
+            <item
+                android:icon="@drawable/notifications_button"
+                android:title="Сповіщення" />
+        </menu>
+    </item>
 </menu>

@@ -8,10 +8,12 @@
     <string name="Category">Категорія</string>
     <string name="open">Open</string>
     <string name="close">Close</string>
-    <string name="main">Main</string>
-    <string name="gaz">Gaz</string>
-    <string name="voda">Voda</string>
-    <string name="elektruka">Elektruka</string>
+    <string name="main">Головна</string>
+    <string name="gaz">Газопостачання</string>
+    <string name="voda">Водопостачання</string>
+    <string name="perekrutia">Транспортні проигоди</string>
+    <string name="wtorm">Стихійні попередження</string>
+    <string name="elektruka">Електроенергія</string>
     <string name="drawer_open">Open navigation drawer</string>
     <string name="drawer_close">Close navigation drawer</string>
 
