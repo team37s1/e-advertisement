@@ -29,10 +29,7 @@
             android:name=".Register"
             android:label="@string/title_activity_register"
             android:theme="@style/AppTheme" />
-        <activity
-            android:name=".TEST"
-            android:label="@string/title_activity_test"
-            android:theme="@style/AppTheme"></activity>
+        
     </application>
 
 </manifest>

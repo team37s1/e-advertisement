@@ -11,7 +11,7 @@
     <string name="main">Головна</string>
     <string name="gaz">Газопостачання</string>
     <string name="voda">Водопостачання</string>
-    <string name="perekrutia">Транспортні проигоди</string>
+    <string name="perekrutia">Перекриття вулиць</string>
     <string name="wtorm">Стихійні попередження</string>
     <string name="elektruka">Електроенергія</string>
     <string name="drawer_open">Open navigation drawer</string>
