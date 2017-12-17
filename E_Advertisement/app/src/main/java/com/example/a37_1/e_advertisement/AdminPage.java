@@ -68,7 +68,7 @@ public class AdminPage extends AppCompatActivity implements AdapterView.OnItemSe
         category.add("Газопостачання");
         category.add("Водопостачання");
         category.add("Перекриття вулиць");
-        category.add("Штормові попередження");
+        category.add("Стихійні попередження");
         category.add("Виберіть категорію");
         final int categorySize = category.size() - 1;
         final int areaSize = area.size() - 1;
