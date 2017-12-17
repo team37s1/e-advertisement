@@ -28,10 +28,10 @@
             <item
                 android:id="@+id/settings"
                 android:icon="@drawable/settings_gears"
-                android:title="Додавання новий" />
-            <item
-                android:icon="@drawable/notifications_button"
-                android:title="Сповіщення" />
+                android:title="Додати новину" />
+            <!--<item-->
+                <!--android:icon="@drawable/notifications_button"-->
+                <!--android:title="Сповіщення" />-->
         </menu>
     </item>
 </menu>

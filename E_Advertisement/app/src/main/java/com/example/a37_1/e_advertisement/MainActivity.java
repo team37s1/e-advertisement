@@ -124,6 +124,12 @@ implements FirstFragment.OnFragmentInteractionListener,
             case R.id.elektruka:
                 fragmentClass = FourthFragment.class;
                 break;
+            case R.id.perekrutia:
+                fragmentClass = FifthFragment.class;
+                break;
+            case R.id.wtorm:
+                fragmentClass = SixthFragment.class;
+                break;
             case R.id.settings:
                 Intent intent = new Intent(MainActivity.this, AdminPage.class);
                 startActivity(intent);
