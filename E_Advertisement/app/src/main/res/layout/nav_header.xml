@@ -2,20 +2,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_height="wrap_content"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
-    android:background="@color/fon">
+    android:layout_width="wrap_content">
 
     <ImageView xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:adjustViewBounds="true"
-        android:background="@color/fon"
         android:contentDescription="TODO"
         android:orientation="vertical"
         android:scaleType="fitCenter"
-        android:src="@drawable/logo_inverted"
+        android:src="@drawable/fon_final"
         app:layout_constraintTop_toTopOf="parent"
         tools:layout_editor_absoluteX="0dp"
-        tools:ignore="MissingConstraints"></ImageView>
+        tools:ignore="MissingConstraints" />
 </android.support.constraint.ConstraintLayout>
