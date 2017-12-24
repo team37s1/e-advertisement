@@ -18,18 +18,19 @@
         <activity android:name=".DescriptionNewActivity" />
         <activity
             android:name=".AdminPage"
-            android:windowSoftInputMode="adjustResize" />
-        <activity android:name=".MainActivity"></activity>
-        <activity
-            android:name=".Register"
-            android:label="@string/title_activity_register"
-            android:theme="@style/AppTheme" />
-        <activity android:name=".SignInActivity">
+            android:windowSoftInputMode="adjustResize" >
+
+        </activity>
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+
+        <activity android:name=".SignInActivity">
+
         </activity>
         <activity android:name=".BaseActivity"></activity>
     </application>
