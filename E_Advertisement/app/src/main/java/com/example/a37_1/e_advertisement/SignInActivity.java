@@ -34,7 +34,7 @@ public class SignInActivity extends BaseActivity implements
     // [START declare_auth]
     private FirebaseAuth mAuth;
     // [END declare_auth]
-
+    public static FirebaseUser currentUser;
     private GoogleSignInClient mGoogleSignInClient;
     private TextView mStatusTextView;
     private TextView mDetailTextView;
@@ -73,7 +73,7 @@ public class SignInActivity extends BaseActivity implements
     public void onStart() {
         super.onStart();
         // Check if user is signed in (non-null) and update UI accordingly.
-        FirebaseUser currentUser = mAuth.getCurrentUser();
+         currentUser = mAuth.getCurrentUser();
         //updateUI(currentUser);
     }
     // [END on_start_check_user]
@@ -116,7 +116,6 @@ public class SignInActivity extends BaseActivity implements
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "signInWithCredential:success");
-                            FirebaseUser user = mAuth.getCurrentUser();
                             //updateUI(user);
                             Intent intent = new Intent(SignInActivity.this, MainActivity.class);
                             startActivity(intent);
@@ -144,7 +143,7 @@ public class SignInActivity extends BaseActivity implements
     }
     // [END signin]
 
-    public  void signOut() {
+    public void signOut() {
         // Firebase sign out
         mAuth.signOut();
 

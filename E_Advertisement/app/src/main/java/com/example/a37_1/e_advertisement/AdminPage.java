@@ -11,10 +11,10 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.example.a37_1.e_advertisement.model.News;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.volokh.danylo.hashtaghelper.HashTagHelper;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,7 +28,6 @@ public class AdminPage extends AppCompatActivity implements AdapterView.OnItemSe
     TextView txtView;
     HashTagHelper mTextHashTagHelper;
     TextView mHashTagText;
-
 
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference myDb = database.getReference("news");
@@ -106,20 +105,26 @@ public class AdminPage extends AppCompatActivity implements AdapterView.OnItemSe
                     Toast.makeText(getApplicationContext(), "Заповніть всі поля", Toast.LENGTH_LONG).show();
                 }
                 else {
-                    String titleValue = title.getText().toString().trim();
-                    String areaValue = sArea.getSelectedItem().toString();
-                    String categoryValue = sCategory.getSelectedItem().toString();
-                    String contentValue = content.getText().toString().trim();
+                    if (SignInActivity.currentUser != null) { // тут выдается ошибка Class not loaded
+                        String titleValue = title.getText().toString().trim();
+                        String areaValue = sArea.getSelectedItem().toString();
+                        String categoryValue = sCategory.getSelectedItem().toString();
+                        String contentValue = content.getText().toString().trim();
 
-                    News news = new News();
-                    news.setTitle(titleValue);
-                    news.setContent(contentValue);
-                    news.setArea(areaValue);
-                    news.setCategory(categoryValue);
+                        News news = new News();
+                        news.setTitle(titleValue);
+                        news.setContent(contentValue);
+                        news.setArea(areaValue);
+                        news.setCategory(categoryValue);
 
-                    myDb.push().setValue(news);
-                    title.setText("");
-                    content.setText("");
+                        myDb.push().setValue(news);
+                        title.setText("");
+                        content.setText("");
+                    } else {
+                        Toast.makeText(getApplicationContext(), "Додавати новини можуть тільки авторизовані користувачі",
+                                Toast.LENGTH_SHORT).show();
+                    }
+
                 }
             }
         });
