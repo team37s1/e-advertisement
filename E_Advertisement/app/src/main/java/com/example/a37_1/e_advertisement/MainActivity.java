@@ -19,7 +19,9 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TableRow;
 
-public class MainActivity extends AppCompatActivity
+import com.google.firebase.auth.FirebaseAuth;
+
+public class MainActivity extends SignInActivity
 implements FirstFragment.OnFragmentInteractionListener,
             SecondFragment.OnFragmentInteractionListener,
             ThirdFragment.OnFragmentInteractionListener,
@@ -121,6 +123,9 @@ implements FirstFragment.OnFragmentInteractionListener,
         Fragment fragment = null;
         Class fragmentClass;
         switch(menuItem.getItemId()) {
+            case R.id.settings:
+                Intent intent = new Intent(MainActivity.this, Admin_page.class);
+                startActivity(intent);
             case R.id.main:
                 fragmentClass = FirstFragment.class;
                 break;
@@ -142,6 +147,14 @@ implements FirstFragment.OnFragmentInteractionListener,
             case R.id.settings:
                 Intent intent = new Intent(MainActivity.this, AdminPage.class);
                 startActivity(intent);
+            case R.id.logOut:
+                Intent logout = new Intent(MainActivity.this, SignInActivity.class);
+                startActivity(logout);
+//                FirebaseAuth fAuth = FirebaseAuth.getInstance();
+//                fAuth.signOut();
+                FirebaseAuth.getInstance().signOut();
+                
+
             default:
                 fragmentClass = FirstFragment.class;
         }
@@ -204,4 +217,5 @@ implements FirstFragment.OnFragmentInteractionListener,
 
         }
     };
+
 }

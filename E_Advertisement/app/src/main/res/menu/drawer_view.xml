@@ -16,6 +16,19 @@
         android:title="@string/elektruka"
         android:icon="@drawable/flash"></item>
 
+    <item
+        android:id="@+id/settings"
+        android:icon="@drawable/settings_gears"
+        android:title="Settings" />
+    <item
+        android:icon="@drawable/notifications_button"
+        android:title="Notifications" />
+    <group>
+        <item android:id="@+id/logOut"
+            android:title="LogOut"
+            android:icon="@drawable/logout"></item>
+
+    </group>
     <item android:id="@+id/perekrutia"
         android:title="@string/perekrutia"
         android:icon="@drawable/road_perspective"></item>
