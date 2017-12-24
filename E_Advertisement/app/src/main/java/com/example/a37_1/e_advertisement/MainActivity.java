@@ -3,18 +3,15 @@ package com.example.a37_1.e_advertisement;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.net.Uri;
+import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.Snackbar;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
-import android.support.v4.app.Fragment;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TableRow;
@@ -124,7 +121,7 @@ implements FirstFragment.OnFragmentInteractionListener,
         Class fragmentClass;
         switch(menuItem.getItemId()) {
             case R.id.settings:
-                Intent intent = new Intent(MainActivity.this, Admin_page.class);
+                Intent intent = new Intent(MainActivity.this, AdminPage.class);
                 startActivity(intent);
             case R.id.main:
                 fragmentClass = FirstFragment.class;
@@ -144,9 +141,9 @@ implements FirstFragment.OnFragmentInteractionListener,
             case R.id.wtorm:
                 fragmentClass = SixthFragment.class;
                 break;
-            case R.id.settings:
-                Intent intent = new Intent(MainActivity.this, AdminPage.class);
-                startActivity(intent);
+//            case R.id.settings:
+//                Intent intent = new Intent(MainActivity.this, AdminPage.class);
+//                startActivity(intent);
             case R.id.logOut:
                 Intent logout = new Intent(MainActivity.this, SignInActivity.class);
                 startActivity(logout);
