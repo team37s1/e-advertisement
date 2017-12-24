@@ -106,10 +106,9 @@ public class SecondFragment extends Fragment {  // TODO: Rename parameter argume
                     for (DataSnapshot issue : dataSnapshot.getChildren()) {
                         News news = issue.getValue(News.class);
                         result.add(news);
-
-
+                        myAdapter.notifyDataSetChanged();
                     }
-                    myAdapter.notifyDataSetChanged();
+
                 }
             }
 
