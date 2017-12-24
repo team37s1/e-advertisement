@@ -91,6 +91,8 @@ public class SecondFragment extends Fragment {  // TODO: Rename parameter argume
         rvMain.setHasFixedSize(true);
         LinearLayoutManager llm = new LinearLayoutManager(getActivity().getApplicationContext());
         llm.setOrientation(LinearLayoutManager.VERTICAL);
+        llm.setReverseLayout(true);
+        llm.setStackFromEnd(true);
         rvMain.setLayoutManager(llm);
         myAdapter = new RecViewAdapt(result);
         rvMain.setAdapter(myAdapter);
@@ -104,9 +106,10 @@ public class SecondFragment extends Fragment {  // TODO: Rename parameter argume
                     for (DataSnapshot issue : dataSnapshot.getChildren()) {
                         News news = issue.getValue(News.class);
                         result.add(news);
-                        myAdapter.notifyDataSetChanged();
+
 
                     }
+                    myAdapter.notifyDataSetChanged();
                 }
             }
 

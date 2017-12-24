@@ -36,8 +36,8 @@ public class AdminPage extends AppCompatActivity implements AdapterView.OnItemSe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_andmin_page);
-        sArea =  findViewById(R.id.sArea);
-        sCategory =  findViewById(R.id.sCategory);
+        sArea = findViewById(R.id.sArea);
+        sCategory = findViewById(R.id.sCategory);
         title = findViewById(R.id.ettitle);
         content = findViewById(R.id.etContent);
         btnSend = findViewById(R.id.addNews);
@@ -73,16 +73,16 @@ public class AdminPage extends AppCompatActivity implements AdapterView.OnItemSe
         final int areaSize = area.size() - 1;
 
         // Creating adapter for spinner
-        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, area){
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, area) {
             @Override
             public int getCount() {
-                return(areaSize); // Truncate the list
+                return (areaSize); // Truncate the list
             }
         };
-        ArrayAdapter<String> dataCategory = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, category){
+        ArrayAdapter<String> dataCategory = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, category) {
             @Override
             public int getCount() {
-                return(categorySize); // Truncate the list
+                return (categorySize); // Truncate the list
             }
         };
 
@@ -101,30 +101,30 @@ public class AdminPage extends AppCompatActivity implements AdapterView.OnItemSe
             @Override
             public void onClick(View view) {
 
-                if( title.getText().toString().trim().equals("") || content.getText().toString().trim().equals("")){
+                if (title.getText().toString().trim().equals("") || content.getText().toString().trim().equals("")) {
                     Toast.makeText(getApplicationContext(), "Заповніть всі поля", Toast.LENGTH_LONG).show();
-                }
-                else {
-                    if (SignInActivity.currentUser != null) { // тут выдается ошибка Class not loaded
-                        String titleValue = title.getText().toString().trim();
-                        String areaValue = sArea.getSelectedItem().toString();
-                        String categoryValue = sCategory.getSelectedItem().toString();
-                        String contentValue = content.getText().toString().trim();
+                } else {
+//                    if (SignInActivity.currentUser != null) { // тут выдается ошибка Class not loaded
+                    String titleValue = title.getText().toString().trim();
+                    String areaValue = sArea.getSelectedItem().toString();
+                    String categoryValue = sCategory.getSelectedItem().toString();
+                    String contentValue = content.getText().toString().trim();
 
-                        News news = new News();
-                        news.setTitle(titleValue);
-                        news.setContent(contentValue);
-                        news.setArea(areaValue);
-                        news.setCategory(categoryValue);
+                    News news = new News();
+                    news.setTitle(titleValue);
+                    news.setContent(contentValue);
+                    news.setArea(areaValue);
+                    news.setCategory(categoryValue);
 
-                        myDb.push().setValue(news);
-                        title.setText("");
-                        content.setText("");
-                    } else {
-                        Toast.makeText(getApplicationContext(), "Додавати новини можуть тільки авторизовані користувачі",
-                                Toast.LENGTH_SHORT).show();
-                    }
-
+                    myDb.push().setValue(news);
+                    title.setText("");
+                    content.setText("");
+//                    } else {
+//                        Toast.makeText(getApplicationContext(), "Додавати новини можуть тільки авторизовані користувачі",
+//                                Toast.LENGTH_SHORT).show();
+//                    }
+//
+//                }
                 }
             }
         });
