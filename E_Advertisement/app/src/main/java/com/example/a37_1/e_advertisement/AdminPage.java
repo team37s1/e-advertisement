@@ -104,7 +104,7 @@ public class AdminPage extends AppCompatActivity implements AdapterView.OnItemSe
                 if (title.getText().toString().trim().equals("") || content.getText().toString().trim().equals("")) {
                     Toast.makeText(getApplicationContext(), "Заповніть всі поля", Toast.LENGTH_LONG).show();
                 } else {
-//                    if (SignInActivity.currentUser != null) { // тут выдается ошибка Class not loaded
+                    if (SignInActivity.currentUser != null) { // тут выдается ошибка Class not loaded
                     String titleValue = title.getText().toString().trim();
                     String areaValue = sArea.getSelectedItem().toString();
                     String categoryValue = sCategory.getSelectedItem().toString();
@@ -119,14 +119,14 @@ public class AdminPage extends AppCompatActivity implements AdapterView.OnItemSe
                     myDb.push().setValue(news);
                     title.setText("");
                     content.setText("");
-//                    } else {
-//                        Toast.makeText(getApplicationContext(), "Додавати новини можуть тільки авторизовані користувачі",
-//                                Toast.LENGTH_SHORT).show();
-//                    }
-//
-//                }
+                    } else {
+                        Toast.makeText(getApplicationContext(), "Додавати новини можуть тільки авторизовані користувачі",
+                                Toast.LENGTH_SHORT).show();
+                    }
+
                 }
-            }
+                }
+//            }
         });
     }
 
