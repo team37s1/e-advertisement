@@ -31,7 +31,7 @@ import java.util.List;
  * Use the {@link FirstFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class FirstFragment extends Fragment  {
+public class FirstFragment extends Fragment {
     SwipeRefreshLayout swipeLayout;
     OnHeadlineSelectedListener mCallback;
 
@@ -39,6 +39,7 @@ public class FirstFragment extends Fragment  {
     public interface OnHeadlineSelectedListener {
         public void onArticleSelected(int position);
     }
+
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -91,13 +92,13 @@ public class FirstFragment extends Fragment  {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         ViewGroup root = (ViewGroup) inflater.inflate(R.layout.fragment_first, null);
 
         rvMain = root.findViewById(R.id.rv_news);
         result = new ArrayList<>();
         rvMain.setHasFixedSize(true);
-        LinearLayoutManager llm = new LinearLayoutManager(getActivity().getApplicationContext());
+        LinearLayoutManager llm = new LinearLayoutManager(getActivity());
         llm.setOrientation(LinearLayoutManager.VERTICAL);
         llm.setReverseLayout(true);
         llm.setStackFromEnd(true);
@@ -108,12 +109,11 @@ public class FirstFragment extends Fragment  {
         return root;
     }
 
-    private void updateList(){
+    private void updateList() {
         myDb.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 result.add(dataSnapshot.getValue(News.class));
-
                 myAdapter.notifyDataSetChanged();
 
             }
@@ -146,6 +146,7 @@ public class FirstFragment extends Fragment  {
             }
         });
     }
+
     private int indexGet(News news) {
         int index = -1;
         for (int i = 0; i < result.size(); i++) {
@@ -159,12 +160,13 @@ public class FirstFragment extends Fragment  {
 
     View.OnClickListener viewContent = new View.OnClickListener() {
         @Override
-        public void onClick(View v){
-            Intent intent=new Intent(v.getContext(),DescriptionNewActivity.class);
-            startActivityForResult(intent,0);
+        public void onClick(View v) {
+            Intent intent = new Intent(v.getContext(), DescriptionNewActivity.class);
+            startActivityForResult(intent, 0);
 
         }
     };
+
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {

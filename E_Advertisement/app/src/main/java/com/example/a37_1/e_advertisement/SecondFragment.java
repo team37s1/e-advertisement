@@ -122,7 +122,6 @@ public class SecondFragment extends Fragment {  // TODO: Rename parameter argume
     }
 
 
-
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
