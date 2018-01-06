@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -14,11 +13,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.a37_1.e_advertisement.model.News;
-import com.google.firebase.database.ChildEventListener;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,11 +45,8 @@ public class FirstFragment extends Fragment {
 
     private List<News> result;
     private RecViewAdapt myAdapter;
-
     private RecyclerView rvMain;
 
-    FirebaseDatabase database = FirebaseDatabase.getInstance();
-    DatabaseReference myDb = database.getReference("news");
     private OnFragmentInteractionListener mListener;
 
     public FirstFragment() {
@@ -105,58 +96,10 @@ public class FirstFragment extends Fragment {
         rvMain.setLayoutManager(llm);
         myAdapter = new RecViewAdapt(result);
         rvMain.setAdapter(myAdapter);
-        updateList();
+
         return root;
     }
 
-    private void updateList() {
-        myDb.addChildEventListener(new ChildEventListener() {
-            @Override
-            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                result.add(dataSnapshot.getValue(News.class));
-                myAdapter.notifyDataSetChanged();
-
-            }
-
-            @Override
-            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-                News news = dataSnapshot.getValue(News.class);
-                int index = indexGet(news);
-                result.set(index, news);
-                myAdapter.notifyItemChanged(index);
-
-            }
-
-            @Override
-            public void onChildRemoved(DataSnapshot dataSnapshot) {
-                News news = dataSnapshot.getValue(News.class);
-                int index = indexGet(news);
-                result.remove(index);
-                myAdapter.notifyItemRemoved(index);
-            }
-
-            @Override
-            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-    }
-
-    private int indexGet(News news) {
-        int index = -1;
-        for (int i = 0; i < result.size(); i++) {
-            if (result.get(i).key.equals(news.key)) {
-                index = 1;
-                break;
-            }
-        }
-        return index;
-    }
 
     View.OnClickListener viewContent = new View.OnClickListener() {
         @Override

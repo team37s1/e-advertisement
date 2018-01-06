@@ -28,7 +28,7 @@ def get_all_news():
                        'area': q['area'],
                        'category': q['category']})
 
-    return jsonify({'result' : output})
+    return jsonify( output)
 
 
 @app.route('/news', methods=['POST'])
@@ -51,6 +51,6 @@ def add_news():
                    'area': new_news['area'],
                    'category': new_news['category']}
 
-    return jsonify({'result': output})
+    return jsonify({ output})
 if __name__ == '__main__':
     app.run(debug = True)

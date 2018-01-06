@@ -11,12 +11,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.a37_1.e_advertisement.model.News;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
-import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,8 +33,6 @@ public class FifthFragment extends Fragment {
     private RecViewAdapt myAdapter;
 
     private RecyclerView rvMain;
-    FirebaseDatabase database = FirebaseDatabase.getInstance();
-    DatabaseReference myDb = database.getReference("news");
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
@@ -94,27 +86,6 @@ public class FifthFragment extends Fragment {
         rvMain.setLayoutManager(llm);
         myAdapter = new RecViewAdapt(result);
         rvMain.setAdapter(myAdapter);
-
-        Query query = myDb.orderByChild("category").equalTo("Перекриття вулиць");
-        query.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                if (dataSnapshot.exists()) {
-
-                    for (DataSnapshot issue : dataSnapshot.getChildren()) {
-                        News news = issue.getValue(News.class);
-                        result.add(news);
-                        myAdapter.notifyDataSetChanged();
-
-                    }
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
 
         return root;
     }

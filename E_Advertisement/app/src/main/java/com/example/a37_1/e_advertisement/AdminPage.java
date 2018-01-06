@@ -13,8 +13,6 @@ import android.widget.Toast;
 
 import com.example.a37_1.e_advertisement.model.News;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.volokh.danylo.hashtaghelper.HashTagHelper;
 
 import java.util.ArrayList;
@@ -31,8 +29,6 @@ public class AdminPage extends AppCompatActivity implements AdapterView.OnItemSe
     HashTagHelper mTextHashTagHelper;
     TextView mHashTagText;
 
-    FirebaseDatabase database = FirebaseDatabase.getInstance();
-    DatabaseReference myDb = database.getReference("news");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -106,7 +102,7 @@ public class AdminPage extends AppCompatActivity implements AdapterView.OnItemSe
                 if (title.getText().toString().trim().equals("") || content.getText().toString().trim().equals("")) {
                     Toast.makeText(getApplicationContext(), "Заповніть всі поля", Toast.LENGTH_LONG).show();
                 } else {
-                    if (SignInActivity.currentUser != null) { // тут выдается ошибка Class not loaded
+
                         String titleValue = title.getText().toString().trim();
                         String areaValue = sArea.getSelectedItem().toString();
                         String categoryValue = sCategory.getSelectedItem().toString();
@@ -118,15 +114,11 @@ public class AdminPage extends AppCompatActivity implements AdapterView.OnItemSe
                         news.setArea(areaValue);
                         news.setCategory(categoryValue);
 
-                        myDb.push().setValue(news);
                         title.setText("");
                         content.setText("");
-                    } else {
-                        Toast.makeText(getApplicationContext(), "Додавати новини можуть тільки авторизовані користувачі",
-                                Toast.LENGTH_SHORT).show();
                     }
 
-                }
+
             }
 //            }
         });

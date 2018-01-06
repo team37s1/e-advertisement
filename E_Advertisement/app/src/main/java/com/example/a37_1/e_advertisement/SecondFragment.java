@@ -6,19 +6,11 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.a37_1.e_advertisement.model.News;
-import com.google.firebase.database.ChildEventListener;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
-import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,10 +37,6 @@ public class SecondFragment extends Fragment {  // TODO: Rename parameter argume
 
     private RecyclerView rvMain;
     private OnFragmentInteractionListener mListener;
-
-    FirebaseDatabase database = FirebaseDatabase.getInstance();
-    DatabaseReference myDb = database.getReference("news");
-
     public SecondFragment() {
         // Required empty public constructor
     }
@@ -97,26 +85,6 @@ public class SecondFragment extends Fragment {  // TODO: Rename parameter argume
         myAdapter = new RecViewAdapt(result);
         rvMain.setAdapter(myAdapter);
 
-        Query query = myDb.orderByChild("category").equalTo("Газопостачання");
-        query.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                if (dataSnapshot.exists()) {
-
-                    for (DataSnapshot issue : dataSnapshot.getChildren()) {
-                        News news = issue.getValue(News.class);
-                        result.add(news);
-                        myAdapter.notifyDataSetChanged();
-                    }
-
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
 
         return root;
     }

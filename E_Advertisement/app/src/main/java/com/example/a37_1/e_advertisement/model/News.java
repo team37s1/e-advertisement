@@ -1,7 +1,6 @@
 package com.example.a37_1.e_advertisement.model;
 
-import io.realm.RealmObject;
-import io.realm.annotations.PrimaryKey;
+
 
 
 
