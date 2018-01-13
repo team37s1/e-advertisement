@@ -43,7 +43,7 @@ public class FirstFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    private List<News> result;
+    private ArrayList<News> result = new ArrayList<>();
     private RecViewAdapt myAdapter;
     private RecyclerView rvMain;
 
@@ -91,9 +91,9 @@ public class FirstFragment extends Fragment {
         rvMain.setHasFixedSize(true);
         LinearLayoutManager llm = new LinearLayoutManager(getActivity());
         llm.setOrientation(LinearLayoutManager.VERTICAL);
-        llm.setReverseLayout(true);
-        llm.setStackFromEnd(true);
         rvMain.setLayoutManager(llm);
+        BackgroundTask backgroundTask = new BackgroundTask(getActivity());
+        result = backgroundTask.getList();
         myAdapter = new RecViewAdapt(result);
         rvMain.setAdapter(myAdapter);
 

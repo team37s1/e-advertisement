@@ -9,16 +9,16 @@ import android.widget.TextView;
 
 import com.example.a37_1.e_advertisement.model.News;
 
-import java.util.List;
+import java.util.ArrayList;
 
 /**
  * Created by User on 26.11.2017.
  */
 
 public class RecViewAdapt extends RecyclerView.Adapter<RecViewAdapt.RecViewHolder> {
-    private List<News> alist;
+    private ArrayList<News> alist;
 
-    public RecViewAdapt(List<News> alist) {
+    public RecViewAdapt(ArrayList<News> alist) {
         this.alist = alist;
     }
 

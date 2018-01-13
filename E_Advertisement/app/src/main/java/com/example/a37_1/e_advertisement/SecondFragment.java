@@ -82,8 +82,6 @@ public class SecondFragment extends Fragment {  // TODO: Rename parameter argume
         llm.setReverseLayout(true);
         llm.setStackFromEnd(true);
         rvMain.setLayoutManager(llm);
-        myAdapter = new RecViewAdapt(result);
-        rvMain.setAdapter(myAdapter);
 
 
         return root;

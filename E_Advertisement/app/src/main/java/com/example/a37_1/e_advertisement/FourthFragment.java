@@ -83,8 +83,6 @@ public class FourthFragment extends Fragment {
         llm.setReverseLayout(true);
         llm.setStackFromEnd(true);
         rvMain.setLayoutManager(llm);
-        myAdapter = new RecViewAdapt(result);
-        rvMain.setAdapter(myAdapter);
 
         return root;
     }

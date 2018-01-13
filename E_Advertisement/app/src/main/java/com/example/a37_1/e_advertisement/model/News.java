@@ -16,12 +16,12 @@ public class News{
     public News(){
 
     }
-    public News(String title, String content, String area, String category, String key){
-        this.title = title;
-        this.content = content;
+    public News(String area, String category, String content,  String title){
+
         this.area = area;
         this.category = category;
-        this.key = key;
+        this.content = content;
+        this.title = title;
     }
 
     public String getTitle() {
@@ -56,11 +56,4 @@ public class News{
         this.category = category;
     }
 
-    public String getKey() {
-        return key;
-    }
-
-    public void setKey(String key) {
-        this.key = key;
-    }
 }
