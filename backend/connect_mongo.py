@@ -6,6 +6,7 @@ app = Flask(__name__)
 app.config['MONGO_DBNAME'] = '37_1'
 app.config['MONGO_URI'] = 'mongodb://admin:admin@ds135574.mlab.com:35574/37_1'
 
+
 mongo = PyMongo(app)
 
 # @app.route('/add')
@@ -16,6 +17,11 @@ mongo = PyMongo(app)
 #                  'area' : 'Водопостаччання',
 #                  'category' : 'Галицький'})
 #     return 'News is added'
+
+@app.route('/')
+def default():
+    return 'Ви на головній'
+
 
 @app.route('/news', methods=['GET'])
 def get_all_news():
@@ -53,4 +59,5 @@ def add_news():
 
     return jsonify({ output})
 if __name__ == '__main__':
-    app.run(debug = True)
+    app.debug = True
+    app.run(host='192.168.0.101', port=8000)
