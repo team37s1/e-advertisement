@@ -1,4 +1,4 @@
-package com.example.a37_1.e_advertisement;
+package com.example.a37_1.e_advertisement.Fragments;
 
 import android.content.Context;
 import android.net.Uri;
@@ -10,6 +10,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.a37_1.e_advertisement.R;
+import com.example.a37_1.e_advertisement.RecViewAdapt;
 import com.example.a37_1.e_advertisement.model.News;
 
 import java.util.ArrayList;
@@ -19,27 +21,25 @@ import java.util.List;
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link FifthFragment.OnFragmentInteractionListener} interface
+ * {@link SecondFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link FifthFragment#newInstance} factory method to
+ * Use the {@link SecondFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class FifthFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
+public class SecondFragment extends Fragment {  // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+
+    // TODO: Rename and change types of parameters
+    private String mParam1;
+    private String mParam2;
     private List<News> result;
     private RecViewAdapt myAdapter;
 
     private RecyclerView rvMain;
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
     private OnFragmentInteractionListener mListener;
-
-    public FifthFragment() {
+    public SecondFragment() {
         // Required empty public constructor
     }
 
@@ -47,13 +47,13 @@ public class FifthFragment extends Fragment {
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
-     * @param param1 Parameter 1.
+     * @param param1 Parameter nav.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment FifthFragment.
+     * @return A new instance of fragment ThirdFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static FifthFragment newInstance(String param1, String param2) {
-        FifthFragment fragment = new FifthFragment();
+    public static SecondFragment newInstance(String param1, String param2) {
+        SecondFragment fragment = new SecondFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -75,7 +75,7 @@ public class FifthFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
 
-        ViewGroup root = (ViewGroup) inflater.inflate(R.layout.fragment_fifth, container, false);
+        ViewGroup root = (ViewGroup) inflater.inflate(R.layout.fragment_second, container, false);
         rvMain = root.findViewById(R.id.rv_news);
         result = new ArrayList<>();
         rvMain.setHasFixedSize(true);
@@ -85,19 +85,25 @@ public class FifthFragment extends Fragment {
         llm.setStackFromEnd(true);
         rvMain.setLayoutManager(llm);
 
+
         return root;
     }
+
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
+        if (context instanceof SecondFragment.OnFragmentInteractionListener) {
+            mListener = (SecondFragment.OnFragmentInteractionListener) context;
+        } else {
+            throw new RuntimeException(context.toString()
+                    + " must implement OnFragmentInteractionListener");
+        }
     }
-
 
     @Override
     public void onDetach() {
         super.onDetach();
-        mListener = null;
     }
 
     /**

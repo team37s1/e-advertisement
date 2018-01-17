@@ -16,6 +16,11 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TableRow;
 
+import com.example.a37_1.e_advertisement.Fragments.FifthFragment;
+import com.example.a37_1.e_advertisement.Fragments.FirstFragment;
+import com.example.a37_1.e_advertisement.Fragments.SecondFragment;
+import com.example.a37_1.e_advertisement.Fragments.SixthFragment;
+import com.example.a37_1.e_advertisement.Fragments.ThirdFragment;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class MainActivity extends SignInActivity

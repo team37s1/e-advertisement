@@ -1,4 +1,4 @@
-package com.example.a37_1.e_advertisement;
+package com.example.a37_1.e_advertisement.Fragments;
 
 import android.content.Context;
 import android.net.Uri;
@@ -10,6 +10,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.a37_1.e_advertisement.R;
+import com.example.a37_1.e_advertisement.RecViewAdapt;
 import com.example.a37_1.e_advertisement.model.News;
 
 import java.util.ArrayList;

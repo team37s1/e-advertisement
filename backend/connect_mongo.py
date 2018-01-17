@@ -9,14 +9,7 @@ app.config['MONGO_URI'] = 'mongodb://admin:admin@ds135574.mlab.com:35574/37_1'
 
 mongo = PyMongo(app)
 
-# @app.route('/add')
-# def add():
-#     news = mongo.db.news
-#     news.insert({'title' : 'Voda',
-#                  'content' : 'vse pogano',
-#                  'area' : 'Водопостаччання',
-#                  'category' : 'Галицький'})
-#     return 'News is added'
+
 
 @app.route('/')
 def default():
@@ -35,6 +28,69 @@ def get_all_news():
                        'category': q['category']})
 
     return jsonify( output)
+
+
+@app.route('/news/gaz', methods=['GET'])
+def get_gaz():
+    gaz = mongo.db.news
+    result = []
+    for q in gaz.find({'category' : 'Газопостачання'}):
+        result.append({'title': q['title'],
+                       'content': q['content'],
+                       'area': q['area'],
+                       'category': q['category']})
+
+    return jsonify(result)
+
+
+@app.route('/news/voda', methods=['GET'])
+def get_voda():
+    voda = mongo.db.news
+    result = []
+    for q in voda.find({'category' : 'Водопостачання'}):
+        result.append({'title': q['title'],
+                       'content': q['content'],
+                       'area': q['area'],
+                       'category': q['category']})
+
+    return jsonify(result)
+
+@app.route('/news/electro', methods=['GET'])
+def get_electro():
+    electro = mongo.db.news
+    result = []
+    for q in electro.find({'category' : 'Електроенергія'}):
+        result.append({'title': q['title'],
+                       'content': q['content'],
+                       'area': q['area'],
+                       'category': q['category']})
+
+    return jsonify(result)
+
+@app.route('/news/street', methods=['GET'])
+def get_street():
+    street = mongo.db.news
+    result = []
+    for q in street.find({'category' : 'Перекриття вулиць'}):
+        result.append({'title': q['title'],
+                       'content': q['content'],
+                       'area': q['area'],
+                       'category': q['category']})
+
+    return jsonify(result)
+
+
+@app.route('/news/storm', methods=['GET'])
+def get_storm():
+    storm = mongo.db.news
+    result = []
+    for q in storm.find({'category' : 'Штормові попередження'}):
+        result.append({'title': q['title'],
+                       'content': q['content'],
+                       'area': q['area'],
+                       'category': q['category']})
+
+    return jsonify(result)
 
 
 @app.route('/news', methods=['POST'])
@@ -57,7 +113,9 @@ def add_news():
                    'area': new_news['area'],
                    'category': new_news['category']}
 
-    return jsonify({ output})
+    return jsonify({'result': output})
+
+
 if __name__ == '__main__':
     app.debug = True
-    app.run(host='192.168.0.101', port=8000)
+    app.run(host='172.16.85.180', port=8000)

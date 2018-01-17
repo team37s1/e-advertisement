@@ -1,29 +1,42 @@
-package com.example.a37_1.e_advertisement;
+package com.example.a37_1.e_advertisement.Fragments;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.a37_1.e_advertisement.BackgroundTask;
+import com.example.a37_1.e_advertisement.DescriptionNewActivity;
+import com.example.a37_1.e_advertisement.R;
+import com.example.a37_1.e_advertisement.RecViewAdapt;
 import com.example.a37_1.e_advertisement.model.News;
-import java.util.ArrayList;
-import java.util.List;
 
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link ThirdFragment.OnFragmentInteractionListener} interface
+ * {@link FirstFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link ThirdFragment#newInstance} factory method to
+ * Use the {@link FirstFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ThirdFragment extends Fragment {
+public class FirstFragment extends Fragment {
+    SwipeRefreshLayout swipeLayout;
+    OnHeadlineSelectedListener mCallback;
+
+    // Container Activity must implement this interface
+    public interface OnHeadlineSelectedListener {
+        public void onArticleSelected(int position);
+    }
+
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -32,15 +45,16 @@ public class ThirdFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-    private List<News> result;
-    private RecViewAdapt myAdapter;
 
+    private ArrayList<News> result = new ArrayList<>();
+    private RecViewAdapt myAdapter;
     private RecyclerView rvMain;
 
     private OnFragmentInteractionListener mListener;
 
-    public ThirdFragment() {
+    public FirstFragment() {
         // Required empty public constructor
+
     }
 
     /**
@@ -49,11 +63,11 @@ public class ThirdFragment extends Fragment {
      *
      * @param param1 Parameter nav.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment ThirdFragment.
+     * @return A new instance of fragment FirstFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static ThirdFragment newInstance(String param1, String param2) {
-        ThirdFragment fragment = new ThirdFragment();
+    public static FirstFragment newInstance(String param1, String param2) {
+        FirstFragment fragment = new FirstFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -64,6 +78,7 @@ public class ThirdFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
@@ -71,21 +86,32 @@ public class ThirdFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        ViewGroup root = (ViewGroup) inflater.inflate(R.layout.fragment_third, container, false);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        ViewGroup root = (ViewGroup) inflater.inflate(R.layout.fragment_first, null);
+
         rvMain = root.findViewById(R.id.rv_news);
         result = new ArrayList<>();
         rvMain.setHasFixedSize(true);
-        LinearLayoutManager llm = new LinearLayoutManager(getActivity().getApplicationContext());
+        LinearLayoutManager llm = new LinearLayoutManager(getActivity());
         llm.setOrientation(LinearLayoutManager.VERTICAL);
-        llm.setReverseLayout(true);
-        llm.setStackFromEnd(true);
         rvMain.setLayoutManager(llm);
-
+        BackgroundTask backgroundTask = new BackgroundTask(getActivity());
+        result = backgroundTask.getList();
+        myAdapter = new RecViewAdapt(result);
+        rvMain.setAdapter(myAdapter);
 
         return root;
     }
+
+
+    View.OnClickListener viewContent = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent intent = new Intent(v.getContext(), DescriptionNewActivity.class);
+            startActivityForResult(intent, 0);
+
+        }
+    };
 
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
@@ -97,10 +123,16 @@ public class ThirdFragment extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
+    }
+
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        try {
+            mListener = (OnFragmentInteractionListener) getActivity();
+        } catch (ClassCastException e) {
+            throw new ClassCastException(getActivity().toString()
                     + " must implement OnFragmentInteractionListener");
         }
     }
@@ -124,5 +156,8 @@ public class ThirdFragment extends Fragment {
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
+
     }
+
+
 }

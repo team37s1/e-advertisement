@@ -24,7 +24,7 @@ import java.util.ArrayList;
 public class BackgroundTask {
     Context context;
     ArrayList<News> arrayList =  new ArrayList<>();
-    String url = "http://192.168.0.101:8000/news";
+    String url = "http://192.168.0.102:8000/news";
 
     public BackgroundTask (Context context){
         this.context = context;
