@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.a37_1.e_advertisement.Connection;
 import com.example.a37_1.e_advertisement.R;
 import com.example.a37_1.e_advertisement.RecViewAdapt;
 import com.example.a37_1.e_advertisement.model.News;
@@ -31,10 +32,12 @@ public class FifthFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-    private List<News> result;
-    private RecViewAdapt myAdapter;
 
+    private ArrayList<News> result = new ArrayList<>();
+    private RecViewAdapt myAdapter;
     private RecyclerView rvMain;
+
+
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
@@ -78,14 +81,18 @@ public class FifthFragment extends Fragment {
         // Inflate the layout for this fragment
 
         ViewGroup root = (ViewGroup) inflater.inflate(R.layout.fragment_fifth, container, false);
+
+
         rvMain = root.findViewById(R.id.rv_news);
         result = new ArrayList<>();
         rvMain.setHasFixedSize(true);
-        LinearLayoutManager llm = new LinearLayoutManager(getActivity().getApplicationContext());
+        LinearLayoutManager llm = new LinearLayoutManager(getActivity());
         llm.setOrientation(LinearLayoutManager.VERTICAL);
-        llm.setReverseLayout(true);
-        llm.setStackFromEnd(true);
         rvMain.setLayoutManager(llm);
+        Connection connection = new Connection(getActivity(), "http://192.168.0.101:8000/api/news/street");
+        result = connection.getList();
+        myAdapter = new RecViewAdapt(result);
+        rvMain.setAdapter(myAdapter);
 
         return root;
     }

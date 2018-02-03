@@ -12,7 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.a37_1.e_advertisement.BackgroundTask;
+import com.example.a37_1.e_advertisement.Connection;
 import com.example.a37_1.e_advertisement.DescriptionNewActivity;
 import com.example.a37_1.e_advertisement.R;
 import com.example.a37_1.e_advertisement.RecViewAdapt;
@@ -95,8 +95,8 @@ public class FirstFragment extends Fragment {
         LinearLayoutManager llm = new LinearLayoutManager(getActivity());
         llm.setOrientation(LinearLayoutManager.VERTICAL);
         rvMain.setLayoutManager(llm);
-        BackgroundTask backgroundTask = new BackgroundTask(getActivity());
-        result = backgroundTask.getList();
+        Connection connection = new Connection(getActivity(), "http://192.168.0.101:8000/api/news");
+        result = connection.getList();
         myAdapter = new RecViewAdapt(result);
         rvMain.setAdapter(myAdapter);
 

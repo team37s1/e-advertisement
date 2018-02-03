@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.a37_1.e_advertisement.Connection;
 import com.example.a37_1.e_advertisement.R;
 import com.example.a37_1.e_advertisement.RecViewAdapt;
 import com.example.a37_1.e_advertisement.model.News;
@@ -34,12 +35,14 @@ public class ThirdFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-    private List<News> result;
-    private RecViewAdapt myAdapter;
 
+    private ArrayList<News> result = new ArrayList<>();
+    private RecViewAdapt myAdapter;
     private RecyclerView rvMain;
 
-    private OnFragmentInteractionListener mListener;
+    private FirstFragment.OnFragmentInteractionListener mListener;
+
+
 
     public ThirdFragment() {
         // Required empty public constructor
@@ -76,15 +79,17 @@ public class ThirdFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         ViewGroup root = (ViewGroup) inflater.inflate(R.layout.fragment_third, container, false);
+
         rvMain = root.findViewById(R.id.rv_news);
         result = new ArrayList<>();
         rvMain.setHasFixedSize(true);
-        LinearLayoutManager llm = new LinearLayoutManager(getActivity().getApplicationContext());
+        LinearLayoutManager llm = new LinearLayoutManager(getActivity());
         llm.setOrientation(LinearLayoutManager.VERTICAL);
-        llm.setReverseLayout(true);
-        llm.setStackFromEnd(true);
         rvMain.setLayoutManager(llm);
-
+        Connection connection = new Connection(getActivity(), "http://192.168.0.101:8000/api/news/voda");
+        result = connection.getList();
+        myAdapter = new RecViewAdapt(result);
+        rvMain.setAdapter(myAdapter);
 
         return root;
     }
@@ -99,12 +104,6 @@ public class ThirdFragment extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
     }
 
     @Override

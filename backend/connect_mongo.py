@@ -16,7 +16,7 @@ def default():
     return 'Ви на головній'
 
 
-@app.route('/news', methods=['GET'])
+@app.route('/api/news', methods=['GET'])
 def get_all_news():
     news = mongo.db.news
     output = []
@@ -30,7 +30,7 @@ def get_all_news():
     return jsonify( output)
 
 
-@app.route('/news/gaz', methods=['GET'])
+@app.route('/api/news/gaz', methods=['GET'])
 def get_gaz():
     gaz = mongo.db.news
     result = []
@@ -43,7 +43,7 @@ def get_gaz():
     return jsonify(result)
 
 
-@app.route('/news/voda', methods=['GET'])
+@app.route('/api/news/voda', methods=['GET'])
 def get_voda():
     voda = mongo.db.news
     result = []
@@ -55,7 +55,7 @@ def get_voda():
 
     return jsonify(result)
 
-@app.route('/news/electro', methods=['GET'])
+@app.route('/api/news/electro', methods=['GET'])
 def get_electro():
     electro = mongo.db.news
     result = []
@@ -67,7 +67,7 @@ def get_electro():
 
     return jsonify(result)
 
-@app.route('/news/street', methods=['GET'])
+@app.route('/api/news/street', methods=['GET'])
 def get_street():
     street = mongo.db.news
     result = []
@@ -80,7 +80,7 @@ def get_street():
     return jsonify(result)
 
 
-@app.route('/news/storm', methods=['GET'])
+@app.route('/api/news/storm', methods=['GET'])
 def get_storm():
     storm = mongo.db.news
     result = []
@@ -92,8 +92,19 @@ def get_storm():
 
     return jsonify(result)
 
+@app.route('/api/news/test', methods=['GET'])
+def test():
+    storm = mongo.db.news
+    result = []
+    for q in storm.find({'category' : 'Штормові попередження'}):
+        result.append({'title': q['title'],
+                       'content': q['content'],
+                       'area': q['area'],
+                       'category': q['category']})
 
-@app.route('/news', methods=['POST'])
+    return jsonify(result)
+
+@app.route('/api/news', methods=['POST'])
 def add_news():
     news = mongo.db.news
 
@@ -112,10 +123,9 @@ def add_news():
                    'content': new_news['content'],
                    'area': new_news['area'],
                    'category': new_news['category']}
-
     return jsonify({'result': output})
 
 
 if __name__ == '__main__':
     app.debug = True
-    app.run(host='172.16.85.180', port=8000)
+    app.run(host='192.168.0.101', port=8000)
