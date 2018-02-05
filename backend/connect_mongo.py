@@ -128,4 +128,5 @@ def add_news():
 
 if __name__ == '__main__':
     app.debug = True
+
     app.run(host='192.168.0.101', port=8000)

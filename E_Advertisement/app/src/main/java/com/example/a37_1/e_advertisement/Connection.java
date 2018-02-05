@@ -11,7 +11,6 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.example.a37_1.e_advertisement.model.News;
 
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -25,6 +24,8 @@ public class Connection {
     private Context context;
     private ArrayList<News> arrayList = new ArrayList<>();
     private String url;
+
+
 
     public Connection(Context context, String url) {
         this.context = context;
@@ -41,7 +42,8 @@ public class Connection {
     }
 
 
-    public ArrayList<News> getList() {
+    public  ArrayList<News> getList() {
+
 
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONArray>() {
@@ -60,19 +62,35 @@ public class Connection {
                             } catch (Exception e) {
                                 e.printStackTrace();
                             }
+
                         }
 
                     }
+
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 Log.d("PIZDOS", String.valueOf(error));
             }
+
         });
 
-        MySingleton.getmInstance(context).addToRequestque(jsonArrayRequest);
-        SystemClock.sleep(get_random());
+        try{
+
+            MySingleton.getmInstance(context).addToRequestque(jsonArrayRequest);
+            Thread mainThread1 = Thread.currentThread();
+
+            Log.d(mainThread1.getName(), "ne tak potok");
+
+        }
+        catch (Throwable e){
+            Log.d("ne tak", String.valueOf(e));
+        }
+      //        SystemClock.sleep(get_random());
 
         return arrayList;
     }
+
 }
+
+

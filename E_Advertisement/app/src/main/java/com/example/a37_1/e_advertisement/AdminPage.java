@@ -11,12 +11,18 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.a37_1.e_advertisement.model.News;
-import com.google.firebase.auth.FirebaseAuth;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.volokh.danylo.hashtaghelper.HashTagHelper;
 
+import org.json.JSONObject;
+
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 public class AdminPage extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
@@ -28,6 +34,8 @@ public class AdminPage extends AppCompatActivity implements AdapterView.OnItemSe
     TextView txtView;
     HashTagHelper mTextHashTagHelper;
     TextView mHashTagText;
+
+    String url = "http://192.168.0.101:8000/api/news";
 
 
     @Override
@@ -44,8 +52,6 @@ public class AdminPage extends AppCompatActivity implements AdapterView.OnItemSe
         mHashTagText = findViewById(R.id.etContent);
         mTextHashTagHelper = HashTagHelper.Creator.create(getResources().getColor(R.color.colorPrimary), null);
         mTextHashTagHelper.handle(mHashTagText);
-
-        ArrayList<Object> mNews = new ArrayList<>();
 
         // Spinner click listener
         sArea.setOnItemSelectedListener(this);
@@ -102,25 +108,38 @@ public class AdminPage extends AppCompatActivity implements AdapterView.OnItemSe
                 if (title.getText().toString().trim().equals("") || content.getText().toString().trim().equals("")) {
                     Toast.makeText(getApplicationContext(), "Заповніть всі поля", Toast.LENGTH_LONG).show();
                 } else {
+                    final String titleValue, areaValue, categoryValue, contentValue;
 
-                        String titleValue = title.getText().toString().trim();
-                        String areaValue = sArea.getSelectedItem().toString();
-                        String categoryValue = sCategory.getSelectedItem().toString();
-                        String contentValue = content.getText().toString().trim();
+                    titleValue = title.getText().toString().trim();
+                    areaValue = sArea.getSelectedItem().toString();
+                    categoryValue = sCategory.getSelectedItem().toString();
+                    contentValue = content.getText().toString().trim();
 
-                        News news = new News();
-                        news.setTitle(titleValue);
-                        news.setContent(contentValue);
-                        news.setArea(areaValue);
-                        news.setCategory(categoryValue);
+                    Map<String, String> params = new HashMap();
+                    params.put("title", titleValue);
+                    params.put("content", contentValue);
+                    params.put("area", areaValue);
+                    params.put("category", categoryValue);
 
-                        title.setText("");
-                        content.setText("");
-                    }
+                    JSONObject parameters = new JSONObject(params);
+                    JsonObjectRequest jsonRequest = new JsonObjectRequest(Request.Method.POST, url, parameters, new Response.Listener<JSONObject>() {
+                        @Override
+                        public void onResponse(JSONObject response) {
 
+                        }
+                    }, new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            error.printStackTrace();
 
+                        }
+                    });
+                    title.setText("");
+                    content.setText("");
+                    MySingleton.getmInstance(AdminPage.this).addToRequestque(jsonRequest);
+
+                }
             }
-//            }
         });
     }
 
