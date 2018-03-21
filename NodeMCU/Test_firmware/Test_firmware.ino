@@ -1,14 +1,15 @@
+#define LEVEL_COUNT 3
+
 int level1 = 5;
 int level2 = 4;
 int level3 = 0;
 int ledpin = 16;
 
 void setup() {
-  pinMode(level1, INPUT_PULLUP);
-  pinMode(level2, INPUT_PULLUP);
-  pinMode(level3, INPUT_PULLUP);
+  for(int i = 1; i <= LEVEL_COUNT; i++){
+    pinMode("level" + i, INPUT_PULLUP);
+  }
   pinMode(ledpin, OUTPUT);
-
   Serial.begin(9600);
 }
 
