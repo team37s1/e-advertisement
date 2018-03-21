@@ -1,23 +1,33 @@
-int ledpin = 16; // D1(gpio5)
-int button = 4; //D2(gpio4)
-int buttonState=0;
-void setup() {
- pinMode(ledpin, OUTPUT);
- pinMode(button, INPUT);
-}
-void loop() {
+int level1 = 5;
+int level2 = 4;
+int level3 = 0;
+int ledpin = 16;
 
- buttonState=digitalRead(button); 
- if (buttonState == 0)
- {
- digitalWrite(ledpin, LOW); 
- delay(200);
-  Serial.print("Level MIN");
- }
- if (buttonState==1)
- {
- digitalWrite(ledpin, HIGH); 
-  Serial.print("Level MAX");
- delay(200);
- }
+void setup() {
+  pinMode(level1, INPUT_PULLUP);
+  pinMode(level2, INPUT_PULLUP);
+  pinMode(level3, INPUT_PULLUP);
+  pinMode(ledpin, OUTPUT);
+
+  Serial.begin(9600);
+}
+
+void loop() {
+  if (digitalRead(level1) == 1){
+    if(digitalRead(level2) == 1){
+      if(digitalRead(level3) == 1){
+        digitalWrite(ledpin, HIGH); 
+      }
+      else{
+      Serial.print("Level 3");
+    }
+    }
+    else{
+      Serial.print("Level 2");
+    }
+  }
+  else{
+    Serial.print("Level 1");
+  }
+
 }
