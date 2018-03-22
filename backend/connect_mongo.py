@@ -125,6 +125,21 @@ def add_news():
                    'category': new_news['category']}
     return jsonify({'result': output})
 
+@app.route('/api/news/mcu', methods=['POST'])
+def add_level():
+    news = mongo.db.news
+
+    title = request.json['title']
+
+
+    news_id = news.insert({'title' :     title})
+    new_news = news.find_one({'_id' : news_id})
+
+    output = {'title': new_news['title']}
+
+    return jsonify({'result': output})
+
+
 
 if __name__ == '__main__':
     app.debug = True
