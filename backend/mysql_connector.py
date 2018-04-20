@@ -2,12 +2,17 @@ from flask import Flask, jsonify, request
 import mysql.connector
 import json
 
-conn = mysql.connector.connect(user = "root", password = "0000", host="localhost", port = "3307",  database = "37_1")
+conn = mysql.connector.connect(user="root",
+                               password="0000",
+                               host="localhost",
+                               port="3307",
+                               database="37_1")
 app = Flask(__name__)
+
 
 @app.route("/")
 def index():
-    pass
+    return "Ви на головній"
 
 
 @app.route("/api/user//signUp", methods=["POST"])
@@ -18,7 +23,7 @@ def signUp():
     password = request.json['password']
     cursor = conn.cursor()
     cursor.execute("INSERT INTO users ( name , surname, login , password)VALUES(%s,%s,%s, %s)",
-                   (name,   surname, login, password))
+                   (name, surname, login, password))
     conn.commit()
     return "Користувача створено"
 
@@ -34,15 +39,13 @@ def check():
     password = request.json['password']
 
     cursor = conn.cursor()
-    cursor.execute("SELECT NAME FROM users WHERE login=  '" + login + "' and  password ='" + password +"'")
+    cursor.execute("SELECT NAME FROM users WHERE login=  '" + login + "' and  password ='" + password + "'")
     user = cursor.fetchone()
 
     if len(user) is 1:
         return user
     else:
         return "failed"
-
-
 
 
 @app.route('/api/news', methods=['GET', 'POST'])
@@ -53,25 +56,26 @@ def get_all_news():
                  "from news left join area on news.area_id = area.id " \
                  "join category on news.Category_id=category.id"
         cursor.execute(script)
-        row_headers=[x[0] for x in cursor.description] #this will extract row headers
+        row_headers = [x[0] for x in cursor.description]
         rv = cursor.fetchall()
-        json_data=[]
+        json_data = []
         for result in rv:
-             json_data.append(dict(zip(row_headers, result)))
+            json_data.append(dict(zip(row_headers, result)))
 
         return json.dumps(json_data)
 
     elif request.method == 'POST':
-        name = request.json['title']
-        surname = request.json['content']
-        login = request.json['area']
-        password = request.json['category']
+        title = request.json['title']
+        description = request.json['description']
+        area_id = request.json['area_id']
+        category_id = request.json['category_id']
         cursor = conn.cursor()
         cursor.execute("INSERT INTO news (title, description, area_id, Category_id)VALUES(%s,%s,%s, %s)",
-                       (name, surname, login, password))
+                       (title, description, area_id, category_id))
         conn.commit()
 
         return "Новину створено"
+
 
 @app.route('/api/news/<category>', methods=['GET'])
 def get_news(category):
@@ -98,7 +102,7 @@ def get_category(category_id):
     script = """select news.Title, news.description, category.name_of_category, area.name_of_area  from news 
                 left join area on news.area_id = area.id 
                 inner join category 
-                on news.Category_id=""" + str(category_id) +"  GROUP BY news.Category_id";
+                on news.Category_id=""" + str(category_id) + "  GROUP BY news.Category_id";
     cursor.execute(script)
     row_headers = [x[0] for x in cursor.description]  # this will extract row headers
     rv = cursor.fetchall()
@@ -110,4 +114,3 @@ def get_category(category_id):
 
 if __name__ == "__main__":
     app.run(debug=True)
-
