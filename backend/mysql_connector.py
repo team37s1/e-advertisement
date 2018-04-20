@@ -28,11 +28,6 @@ def signUp():
     return "Користувача створено"
 
 
-@app.route("/login")
-def login():
-    pass
-
-
 @app.route("/api/user/checkUser", methods=["POST"])
 def check():
     login = request.json['login']
@@ -47,22 +42,26 @@ def check():
     else:
         return "failed"
 
+def get_json(script):
+    cursor = conn.cursor()
+
+    cursor.execute(script)
+    row_headers = [x[0] for x in cursor.description]
+    rv = cursor.fetchall()
+    json_data = []
+    for result in rv:
+        json_data.append(dict(zip(row_headers, result)))
+    return json.dumps(json_data)
 
 @app.route('/api/news', methods=['GET', 'POST'])
 def get_all_news():
     if request.method == 'GET':
-        cursor = conn.cursor()
         script = "select news.title, news.description, area.name_of_area, category.name_of_category " \
                  "from news left join area on news.area_id = area.id " \
                  "join category on news.Category_id=category.id"
-        cursor.execute(script)
-        row_headers = [x[0] for x in cursor.description]
-        rv = cursor.fetchall()
-        json_data = []
-        for result in rv:
-            json_data.append(dict(zip(row_headers, result)))
+        result = get_json(script)
 
-        return json.dumps(json_data)
+        return result
 
     elif request.method == 'POST':
         title = request.json['title']
@@ -98,18 +97,12 @@ def get_news(category):
 
 
 def get_category(category_id):
-    cursor = conn.cursor()
     script = """select news.Title, news.description, category.name_of_category, area.name_of_area  from news 
                 left join area on news.area_id = area.id 
                 inner join category 
                 on news.Category_id=""" + str(category_id) + "  GROUP BY news.Category_id";
-    cursor.execute(script)
-    row_headers = [x[0] for x in cursor.description]  # this will extract row headers
-    rv = cursor.fetchall()
-    json_data = []
-    for result in rv:
-        json_data.append(dict(zip(row_headers, result)))
-    return json.dumps(json_data)
+    result = get_json(script)
+    return result
 
 
 if __name__ == "__main__":
