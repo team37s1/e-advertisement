@@ -51,7 +51,7 @@ def get_json(script):
     json_data = []
     for result in rv:
         json_data.append(dict(zip(row_headers, result)))
-    return json.dumps(json_data)
+    return jsonify(json_data)
 
 @app.route('/api/news', methods=['GET', 'POST'])
 def get_all_news():
@@ -100,7 +100,7 @@ def get_category(category_id):
     script = """select news.Title, news.description, category.name_of_category, area.name_of_area  from news 
                 left join area on news.area_id = area.id 
                 inner join category 
-                on news.Category_id=""" + str(category_id) + "  GROUP BY news.Category_id";
+                on news.Category_id= category.id where news.Category_id =""" + str(category_id)
     result = get_json(script)
     return result
 
