@@ -1,6 +1,5 @@
 from flask import Flask, jsonify, request
 import mysql.connector
-import json
 
 conn = mysql.connector.connect(user="root",
                                password="0000",
@@ -15,7 +14,7 @@ def index():
     return "Ви на головній"
 
 
-@app.route("/api/user//signUp", methods=["POST"])
+@app.route("/api/user/signUp", methods=["POST"])
 def signUp():
     name = request.json['name']
     surname = request.json['surname']
@@ -42,6 +41,7 @@ def check():
     else:
         return "failed"
 
+
 def get_json(script):
     cursor = conn.cursor()
 
@@ -52,6 +52,7 @@ def get_json(script):
     for result in rv:
         json_data.append(dict(zip(row_headers, result)))
     return jsonify(json_data)
+
 
 @app.route('/api/news', methods=['GET', 'POST'])
 def get_all_news():
@@ -103,6 +104,38 @@ def get_category(category_id):
                 on news.Category_id= category.id where news.Category_id =""" + str(category_id)
     result = get_json(script)
     return result
+
+
+@app.route("/api/mcu/add_device", methods=["POST"])
+def add_device():
+    user = request.json['user_id']
+    level = request.json['level']
+    cursor = conn.cursor()
+    cursor.execute("INSERT INTO users (Users_id , level)VALUES(%s, %s)",
+                   (user, level))
+    conn.commit()
+    return "Девайс додано до користувача"
+
+
+
+@app.route("/api/mcu/update_level&device_id=<id>", methods=["POST"])
+def uplevel(id):
+    level = request.json['level']
+
+    cursor = conn.cursor()
+    get_level = """select smart_bottle.level  from smart_bottle
+                left join users on smart_bottle.Users_id = users.id
+				where smart_bottle.id = """ + id
+    cursor.execute(get_level)
+    val = cursor.fetchone()
+
+    if str(val[0]) != str(level):
+        cursor1 = conn.cursor()
+        cursor1.execute("UPDATE smart_bottle SET level=" + level + " WHERE id=" + id)
+        conn.commit()
+        return "Дані успішно оновллено"
+    else:
+        return "Шось не так"
 
 
 if __name__ == "__main__":
