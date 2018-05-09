@@ -3,29 +3,38 @@ package com.example.a37_1.e_advertisement;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.net.Uri;
+import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
-import android.support.v4.app.Fragment;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TableRow;
 
-public class MainActivity extends AppCompatActivity
-implements FirstFragment.OnFragmentInteractionListener,
-            SecondFragment.OnFragmentInteractionListener,
-            ThirdFragment.OnFragmentInteractionListener,
-            FourthFragment.OnFragmentInteractionListener{
+import com.example.a37_1.e_advertisement.Fragments.FifthFragment;
+import com.example.a37_1.e_advertisement.Fragments.FirstFragment;
+import com.example.a37_1.e_advertisement.Fragments.FourthFragment;
+import com.example.a37_1.e_advertisement.Fragments.RefreshFragment;
+import com.example.a37_1.e_advertisement.Fragments.SecondFragment;
+import com.example.a37_1.e_advertisement.Fragments.SixthFragment;
+import com.example.a37_1.e_advertisement.Fragments.ThirdFragment;
+import com.google.firebase.auth.FirebaseAuth;
+
+public class MainActivity extends SignInActivity
+        implements FirstFragment.OnFragmentInteractionListener,
+        SecondFragment.OnFragmentInteractionListener,
+        ThirdFragment.OnFragmentInteractionListener,
+        FourthFragment.OnFragmentInteractionListener,
+        RefreshFragment.OnFragmentInteractionListener {
     private DrawerLayout mDrawer;
     private Toolbar toolbar;
     private NavigationView nvDrawer;
-
+    private FloatingActionButton fab;
     // Убедитесь, что используется версия
     // android.support.v7.app.ActionBarDrawerToggle.
 
@@ -33,6 +42,7 @@ implements FirstFragment.OnFragmentInteractionListener,
 
     private ActionBarDrawerToggle drawerToggle;
     TableRow news1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,10 +76,17 @@ implements FirstFragment.OnFragmentInteractionListener,
 
         // Привязать события DrawerLayout'а к ActionBarToggle
         mDrawer.addDrawerListener(drawerToggle);
-
-
+        //nvDrawer.setItemIconTintList(null);
+        fab = findViewById(R.id.floatingActionButton);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this, AdminPage.class));
+            }
+        });
 
     }
+
 
     private void openFragment() {
         Fragment fragment = null;
@@ -111,7 +128,10 @@ implements FirstFragment.OnFragmentInteractionListener,
         // на основе нажатия на элемент навигации
         Fragment fragment = null;
         Class fragmentClass;
-        switch(menuItem.getItemId()) {
+        switch (menuItem.getItemId()) {
+            case R.id.settings:
+                Intent intent = new Intent(MainActivity.this, AdminPage.class);
+                startActivity(intent);
             case R.id.main:
                 fragmentClass = FirstFragment.class;
                 break;
@@ -124,9 +144,23 @@ implements FirstFragment.OnFragmentInteractionListener,
             case R.id.elektruka:
                 fragmentClass = FourthFragment.class;
                 break;
-            case R.id.settings:
-                Intent intent = new Intent(MainActivity.this, Admin_page.class);
-                startActivity(intent);
+            case R.id.perekrutia:
+                fragmentClass = FifthFragment.class;
+                break;
+            case R.id.wtorm:
+                fragmentClass = SixthFragment.class;
+                break;
+            case R.id.refresh:
+                fragmentClass = RefreshFragment.class;
+                break;
+            case R.id.logOut:
+                Intent logout = new Intent(MainActivity.this, SignInActivity.class);
+                startActivity(logout);
+//                FirebaseAuth fAuth = FirebaseAuth.getInstance();
+//                fAuth.signOut();
+                FirebaseAuth.getInstance().signOut();
+
+
             default:
                 fragmentClass = FirstFragment.class;
         }
@@ -156,7 +190,7 @@ implements FirstFragment.OnFragmentInteractionListener,
         // ActionBarDrawToggle() не предусматривает в ней
         // необходимости и не будет отображать иконку гамбургера без
         // неё
-        return new ActionBarDrawerToggle(this, mDrawer, toolbar, R.string.drawer_open,  R.string.drawer_close);
+        return new ActionBarDrawerToggle(this, mDrawer, toolbar, R.string.drawer_open, R.string.drawer_close);
     }
 
     // Есть две сигнатуры и только `onPostCreate(Bundle state)`
@@ -176,17 +210,19 @@ implements FirstFragment.OnFragmentInteractionListener,
         // drawer'а
         drawerToggle.onConfigurationChanged(newConfig);
     }
+
     @Override
-    public void onFragmentInteraction(Uri uri){
+    public void onFragmentInteraction(Uri uri) {
         //you can leave it empty
     }
 
     View.OnClickListener viewContent = new View.OnClickListener() {
         @Override
-        public void onClick(View v){
-            Intent intent=new Intent(v.getContext(),DescriptionNewActivity.class);
-            startActivityForResult(intent,0);
+        public void onClick(View v) {
+            Intent intent = new Intent(v.getContext(), DescriptionNewActivity.class);
+            startActivityForResult(intent, 0);
 
         }
     };
+
 }

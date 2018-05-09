@@ -1,24 +1,27 @@
 package com.example.a37_1.e_advertisement.model;
 
-import io.realm.RealmObject;
-import io.realm.annotations.PrimaryKey;
 
 
 
-public class News extends RealmObject {
-    private String title;
-    private String content;
-//    private String area;
-//    private String category;
 
-    @Override
-    public String toString() {
-        return "News{" +
-                "title='" + title + '\'' +
-                ", content='" + content + '\'' +
-//                ",area='"+ area +'\''+
-//                ",category'="+category +'\''+
-                '}';
+public class News{
+    public String title;
+    public String content;
+    public String area;
+    public String category;
+    public String  key;
+
+
+
+    public News(){
+
+    }
+    public News(String area, String category, String content,  String title){
+
+        this.area = area;
+        this.category = category;
+        this.content = content;
+        this.title = title;
     }
 
     public String getTitle() {
@@ -36,19 +39,21 @@ public class News extends RealmObject {
     public void setContent(String content) {
         this.content = content;
     }
-//    public String getArea(String area) {
-//        return area;
-//    }
-//
-//    public void setArea(String area) {
-//        this.area = area;
-//    }
-//
-//    public String getCategory(String category) {
-//        return category;
-//    }
-//
-//    public void setCategory(String category) {
-//        this.category = category;
-//    }
+
+    public String getArea() {
+        return area;
+    }
+
+    public void setArea(String area) {
+        this.area = area;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
 }
