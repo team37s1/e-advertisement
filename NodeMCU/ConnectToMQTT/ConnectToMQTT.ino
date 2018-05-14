@@ -5,7 +5,7 @@
 char* ssid = "TP-Link_4G";                                          //info about to Wi-Fi && MQTT
 char* password =  "0322752762";
 char* mqttServer = "sheep.rmq.cloudamqp.com";
-int mqttPort = 1883;
+int mqttPort = 8883;
 char* mqttUser = "mxetqdmd:mxetqdmd";
 char* mqttPassword = "IHESbjw0ACljk2biVi5fa_zv36FUXKLL";  
 
