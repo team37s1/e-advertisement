@@ -9,9 +9,21 @@ import com.google.gson.annotations.SerializedName;
 
 public class LevelModel {
 
+    @SerializedName("description")
+    @Expose
+    private String description;
     @SerializedName("level")
     @Expose
     private String level;
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
 
     public LevelModel(String level) {
         this.level = level;

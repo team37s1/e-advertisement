@@ -19,8 +19,6 @@ import com.example.a37_1.e_advertisement.Utils.InternetConnection;
 import com.example.a37_1.e_advertisement.model.LevelModel;
 import com.example.a37_1.e_advertisement.model.LevelsList;
 
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
 
 import retrofit2.Call;
@@ -37,7 +35,6 @@ public class RefreshFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-    TextView showLev;
     Button refresh;
 
     private ListView listView;
@@ -80,22 +77,20 @@ public class RefreshFragment extends Fragment {
         contactList = new ArrayList<>();
 
         parentView = v.findViewById(R.id.parentLayout);
-        listView = (ListView) v.findViewById(R.id.listView);
-
+        listView = v.findViewById(R.id.listView);
 
 
         refresh.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                    refresh();
+                        refresh();
 
                     }
                 });
 
 
-
-        return  v;
+        return v;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -105,7 +100,7 @@ public class RefreshFragment extends Fragment {
         }
     }
 
-    public  void refresh(){
+    public void refresh() {
 
         if (InternetConnection.checkConnection(getActivity().getApplicationContext())) {
             ApiService api = RetroClient.getApiService();
@@ -123,18 +118,18 @@ public class RefreshFragment extends Fragment {
                         listView.setAdapter(adapter);
 
                     } else {
-                        System.out.print("Pizso");
+                        System.out.print("not data");
                     }
                 }
 
                 @Override
                 public void onFailure(Call<LevelsList> call, Throwable t) {
-                    System.out.print("Pizso");
+                    System.out.print("Not servak");
                 }
             });
 
         } else {
-            System.out.print("Pizso");
+            System.out.print("Not connection");
         }
     }
 

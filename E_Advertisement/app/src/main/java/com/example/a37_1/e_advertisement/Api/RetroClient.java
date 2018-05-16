@@ -1,6 +1,5 @@
 package com.example.a37_1.e_advertisement.Api;
 
-
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -9,7 +8,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 
 public class RetroClient {
-    private static final String ROOT_URL = "http://172.20.253.172:5000";
+    private static final String ROOT_URL = "http://172.16.85.180:5000";
 
     /**
      * Get Retrofit Instance

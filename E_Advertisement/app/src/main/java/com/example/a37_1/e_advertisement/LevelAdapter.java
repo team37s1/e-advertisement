@@ -11,7 +11,6 @@ import android.widget.TextView;
 import com.example.a37_1.e_advertisement.model.LevelModel;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by Vova0199 on 08.05.2018.
@@ -50,21 +49,25 @@ public class LevelAdapter extends ArrayAdapter<LevelModel> {
         LevelModel item = getItem(position);
 
         vh.textViewName.setText(item.getLevel());
+        vh.description.setText(item.getDescription());
         return vh.rootView;
     }
 
     private static class ViewHolder {
         public final RelativeLayout rootView;
         public final TextView textViewName;
+        public final TextView description;
 
-        private ViewHolder(RelativeLayout rootView, TextView textViewName) {
+        private ViewHolder(RelativeLayout rootView, TextView textViewName, TextView description) {
             this.rootView = rootView;
             this.textViewName = textViewName;
+            this.description = description;
         }
 
         public static ViewHolder create(RelativeLayout rootView) {
             TextView textViewEmail = rootView.findViewById(R.id.textViewName);
-            return new ViewHolder(rootView,  textViewEmail);
+            TextView description = rootView.findViewById(R.id.description);
+            return new ViewHolder(rootView, textViewEmail, description);
         }
 
     }
