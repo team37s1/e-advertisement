@@ -1,5 +1,6 @@
 from flask import Flask, jsonify, request
 import mysql.connector
+import datetime
 
 conn = mysql.connector.connect(user="root",
                                password="0000",
@@ -7,6 +8,7 @@ conn = mysql.connector.connect(user="root",
                                port="3307",
                                database="37_1")
 app = Flask(__name__)
+now = datetime.datetime.now()
 
 
 @app.route("/")
@@ -120,7 +122,7 @@ def add_device():
 
 @app.route("/api/mcu/check_level/<id>", methods=["GET"])
 def checklevel(id):
-    script = """select level  from smart_bottle
+    script = """select level, description  from smart_bottle
 				where Users_id = """ + id
 
     cursor = conn.cursor()
@@ -144,10 +146,13 @@ def uplevel(id):
 				where smart_bottle.id = """ + id
     cursor.execute(get_level)
     val = cursor.fetchone()
+    time = "'" + now.strftime("%Y-%m-%d %H:%M") + "'"
 
     if str(val[0]) != str(level):
         cursor1 = conn.cursor()
-        cursor1.execute("UPDATE smart_bottle SET level=" + level + " WHERE id=" + id)
+        cursor1.execute("UPDATE smart_bottle SET level=" + level + ", time=" + time+ " WHERE id=" + id)
+        cursor.execute("INSERT INTO history (smart_bottle_id , level, date)VALUES(%s, %s, %s)",
+                       (id, level, time))
         conn.commit()
         return "Дані успішно оновллено"
     else:
