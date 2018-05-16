@@ -10,8 +10,13 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="CoverageDataManager">
+    <SUITE FILE_PATH="coverage/backend$pytest.coverage" NAME="pytest Coverage Results" MODIFIED="1526295499145" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/backend$Unittests_for_ap_TestFlaskApi_test_hello_world.coverage" NAME="Unittests for ap.TestFlaskApi.test_hello_world Coverage Results" MODIFIED="1526295904454" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/backend$Unittests_for_ap_TestFlaskApiUsingRequests_test_hello_world.coverage" NAME="Unittests for ap.TestFlaskApiUsingRequests.test_hello_world Coverage Results" MODIFIED="1526296441739" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/backend$connect_mongo.coverage" NAME="connect_mongo Coverage Results" MODIFIED="1525688614845" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/backend$Flask__mysql_connector_py_.coverage" NAME="Flask (mysql_connector.py) Coverage Results" MODIFIED="1525780605676" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/backend$Flask__mysql_connector_py_.coverage" NAME="Flask (mysql_connector.py) Coverage Results" MODIFIED="1526313826372" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/backend$Unittests_for_ap_TestFlaskApiUsingRequests_test_category.coverage" NAME="Unittests for ap.TestFlaskApiUsingRequests.test_category Coverage Results" MODIFIED="1526296453147" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/backend$Unittests_for_ap_TestFlaskApiUsingRequests.coverage" NAME="Unittests for ap.TestFlaskApiUsingRequests Coverage Results" MODIFIED="1526297062813" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
   <component name="DatabaseView">
     <option name="SHOW_INTERMEDIATE" value="true" />
@@ -32,42 +37,11 @@
       <file leaf-file-name="mysql_connector.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/mysql_connector.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1879">
-              <caret line="136" column="48" selection-start-line="136" selection-start-column="48" selection-end-line="136" selection-end-column="48" />
-              <folding>
-                <element signature="e#0#41#0" expanded="true" />
-                <element signature="e#449#816#0" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="connect_mongo.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/connect_mongo.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="85">
-              <caret line="6" column="78" selection-start-line="6" selection-start-column="78" selection-end-line="6" selection-end-column="78" />
+            <state relative-caret-position="478">
+              <caret line="132" column="56" lean-forward="true" selection-start-line="132" selection-start-column="56" selection-end-line="132" selection-end-column="56" />
               <folding>
                 <element signature="e#0#41#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="mqtt.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/mqtt.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="680">
-              <caret line="41" selection-start-line="41" selection-end-line="41" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="script.sql" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/DB model/script.sql">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="374">
-              <caret line="22" column="43" selection-end-line="125" />
             </state>
           </provider>
         </entry>
@@ -87,6 +61,8 @@
         <option value="C:/Python34/Lib/site-packages/flask/ext/__init__.py" />
         <option value="$PROJECT_DIR$/connect_mongo.py" />
         <option value="$PROJECT_DIR$/MCU.py" />
+        <option value="$PROJECT_DIR$/pytest.py" />
+        <option value="$PROJECT_DIR$/ap.py" />
         <option value="$PROJECT_DIR$/mysql_connector.py" />
       </list>
     </option>
@@ -141,7 +117,7 @@
     </option>
   </component>
   <component name="RunManager" selected="Flask server.Flask (mysql_connector.py)">
-    <configuration name="connect_mongo" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="pytest" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="backend" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -154,7 +130,7 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/connect_mongo.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/pytest.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -174,13 +150,77 @@
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="launchJavascriptDebuger" value="false" />
     </configuration>
+    <configuration name="Unittests for ap.TestFlaskApiUsingRequests" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
+      <module name="backend" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;ap.TestFlaskApiUsingRequests&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+    </configuration>
+    <configuration name="Unittests for ap.TestFlaskApiUsingRequests.test_category" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
+      <module name="backend" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;ap.TestFlaskApiUsingRequests.test_category&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+    </configuration>
+    <configuration name="Unittests for ap.TestFlaskApiUsingRequests.test_hello_world" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
+      <module name="backend" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;ap.TestFlaskApiUsingRequests.test_hello_world&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+    </configuration>
+    <configuration name="Unittests for ap.TestFlaskApi.test_hello_world" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
+      <module name="backend" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;ap.TestFlaskApi.test_hello_world&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+    </configuration>
     <list>
       <item itemvalue="Flask server.Flask (mysql_connector.py)" />
-      <item itemvalue="Python.connect_mongo" />
+      <item itemvalue="Python.pytest" />
+      <item itemvalue="Python tests.Unittests for ap.TestFlaskApiUsingRequests.test_hello_world" />
+      <item itemvalue="Python tests.Unittests for ap.TestFlaskApi.test_hello_world" />
+      <item itemvalue="Python tests.Unittests for ap.TestFlaskApiUsingRequests.test_category" />
+      <item itemvalue="Python tests.Unittests for ap.TestFlaskApiUsingRequests" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.connect_mongo" />
+        <item itemvalue="Python tests.Unittests for ap.TestFlaskApiUsingRequests" />
+        <item itemvalue="Python tests.Unittests for ap.TestFlaskApiUsingRequests.test_category" />
+        <item itemvalue="Python tests.Unittests for ap.TestFlaskApiUsingRequests.test_hello_world" />
+        <item itemvalue="Python tests.Unittests for ap.TestFlaskApi.test_hello_world" />
+        <item itemvalue="Python.pytest" />
       </list>
     </recent_temporary>
   </component>
@@ -197,9 +237,40 @@
     </task>
     <servers />
   </component>
+  <component name="TestHistory">
+    <history-entry file="Unittests_for_ap_TestFlaskApiUsingRequests_test_category - 2018.05.14 at 14h 13m 35s.xml">
+      <configuration name="Unittests for ap.TestFlaskApiUsingRequests.test_category" configurationId="tests" />
+    </history-entry>
+    <history-entry file="Unittests_for_ap_TestFlaskApiUsingRequests_test_hello_world - 2018.05.14 at 14h 13m 38s.xml">
+      <configuration name="Unittests for ap.TestFlaskApiUsingRequests.test_hello_world" configurationId="tests" />
+    </history-entry>
+    <history-entry file="Unittests_for_ap_TestFlaskApiUsingRequests_test_hello_world - 2018.05.14 at 14h 13m 50s.xml">
+      <configuration name="Unittests for ap.TestFlaskApiUsingRequests.test_hello_world" configurationId="tests" />
+    </history-entry>
+    <history-entry file="Unittests_for_ap_TestFlaskApiUsingRequests_test_hello_world - 2018.05.14 at 14h 14m 02s.xml">
+      <configuration name="Unittests for ap.TestFlaskApiUsingRequests.test_hello_world" configurationId="tests" />
+    </history-entry>
+    <history-entry file="Unittests_for_ap_TestFlaskApiUsingRequests_test_category - 2018.05.14 at 14h 14m 13s.xml">
+      <configuration name="Unittests for ap.TestFlaskApiUsingRequests.test_category" configurationId="tests" />
+    </history-entry>
+    <history-entry file="Unittests_for_ap_TestFlaskApiUsingRequests - 2018.05.14 at 14h 14m 25s.xml">
+      <configuration name="Unittests for ap.TestFlaskApiUsingRequests" configurationId="tests" />
+    </history-entry>
+    <history-entry file="Unittests_for_ap_TestFlaskApiUsingRequests - 2018.05.14 at 14h 15m 49s.xml">
+      <configuration name="Unittests for ap.TestFlaskApiUsingRequests" configurationId="tests" />
+    </history-entry>
+    <history-entry file="Unittests_for_ap_TestFlaskApiUsingRequests - 2018.05.14 at 14h 16m 12s.xml">
+      <configuration name="Unittests for ap.TestFlaskApiUsingRequests" configurationId="tests" />
+    </history-entry>
+    <history-entry file="Unittests_for_ap_TestFlaskApiUsingRequests - 2018.05.14 at 14h 18m 09s.xml">
+      <configuration name="Unittests for ap.TestFlaskApiUsingRequests" configurationId="tests" />
+    </history-entry>
+    <history-entry file="Unittests_for_ap_TestFlaskApiUsingRequests - 2018.05.14 at 14h 24m 23s.xml">
+      <configuration name="Unittests for ap.TestFlaskApiUsingRequests" configurationId="tests" />
+    </history-entry>
+  </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" weight="0.32915717" />
@@ -241,35 +312,10 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="25" />
+      <option name="time" value="31" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/DB model/script.sql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="22" column="43" selection-end-line="125" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mysql_connector.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2363">
-          <caret line="139" lean-forward="true" selection-start-line="139" selection-end-line="139" />
-          <folding>
-            <element signature="e#0#41#0" expanded="true" />
-            <element signature="e#449#816#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mqtt.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="697">
-          <caret line="41" selection-start-line="41" selection-end-line="41" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/DB model/script.sql">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="374">
@@ -283,7 +329,6 @@
           <caret line="34" column="26" lean-forward="true" selection-start-line="34" selection-start-column="26" selection-end-line="34" selection-end-column="26" />
           <folding>
             <element signature="e#0#41#0" expanded="true" />
-            <element signature="e#449#816#0" />
           </folding>
         </state>
       </provider>
@@ -308,7 +353,6 @@
           <caret line="9" selection-start-line="9" selection-end-line="9" />
           <folding>
             <element signature="e#0#41#0" expanded="true" />
-            <element signature="e#449#816#0" />
           </folding>
         </state>
       </provider>
@@ -333,7 +377,6 @@
           <caret line="45" lean-forward="true" selection-start-line="45" selection-end-line="45" />
           <folding>
             <element signature="e#0#41#0" expanded="true" />
-            <element signature="e#449#816#0" />
           </folding>
         </state>
       </provider>
@@ -358,7 +401,6 @@
           <caret line="1" column="22" selection-start-line="1" selection-start-column="22" selection-end-line="1" selection-end-column="22" />
           <folding>
             <element signature="e#0#41#0" expanded="true" />
-            <element signature="e#449#816#0" />
           </folding>
         </state>
       </provider>
@@ -383,7 +425,6 @@
           <caret line="95" column="17" lean-forward="true" selection-start-line="95" selection-start-column="17" selection-end-line="95" selection-end-column="17" />
           <folding>
             <element signature="e#0#41#0" expanded="true" />
-            <element signature="e#449#816#0" />
           </folding>
         </state>
       </provider>
@@ -408,7 +449,6 @@
           <caret line="96" column="13" selection-start-line="96" selection-start-column="13" selection-end-line="98" selection-end-column="69" />
           <folding>
             <element signature="e#0#41#0" expanded="true" />
-            <element signature="e#449#816#0" />
           </folding>
         </state>
       </provider>
@@ -433,7 +473,6 @@
           <caret line="46" selection-start-line="46" selection-end-line="46" />
           <folding>
             <element signature="e#0#41#0" expanded="true" />
-            <element signature="e#449#816#0" />
           </folding>
         </state>
       </provider>
@@ -472,7 +511,6 @@
           <caret line="11" selection-start-line="11" selection-end-line="11" />
           <folding>
             <element signature="e#0#41#0" expanded="true" />
-            <element signature="e#449#816#0" />
           </folding>
         </state>
       </provider>
@@ -610,31 +648,48 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/MCU.py" />
     <entry file="file://$PROJECT_DIR$/mqtt.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="680">
+        <state relative-caret-position="550">
           <caret line="41" selection-start-line="41" selection-end-line="41" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/MCU.py" />
     <entry file="file://$PROJECT_DIR$/connect_mongo.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
+        <state relative-caret-position="17">
           <caret line="6" column="78" selection-start-line="6" selection-start-column="78" selection-end-line="6" selection-end-column="78" />
-          <folding>
-            <element signature="e#0#41#0" expanded="true" />
-          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pytest.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="12" lean-forward="true" selection-start-line="12" selection-end-line="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://C:/Python34/Lib/site-packages/requests/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="644">
+          <caret line="891" selection-start-line="891" selection-end-line="891" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ap.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="833">
+          <caret line="49" selection-start-line="49" selection-end-line="49" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/mysql_connector.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1879">
-          <caret line="136" column="48" selection-start-line="136" selection-start-column="48" selection-end-line="136" selection-end-column="48" />
+        <state relative-caret-position="478">
+          <caret line="132" column="56" lean-forward="true" selection-start-line="132" selection-start-column="56" selection-end-line="132" selection-end-column="56" />
           <folding>
             <element signature="e#0#41#0" expanded="true" />
-            <element signature="e#449#816#0" />
           </folding>
         </state>
       </provider>
