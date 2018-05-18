@@ -1,26 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:id="@+id/main"
+    <item
+        android:id="@+id/main"
         android:title="@string/main"
-        android:icon="@drawable/home_icon_silhouette"></item>
+        android:icon="@drawable/home_icon_silhouette" />
 
-    <item android:id="@+id/gaz"
+    <item
+        android:id="@+id/gaz"
         android:title="@string/gaz"
-        android:icon="@drawable/flame"></item>
+        android:icon="@drawable/flame" />
 
-    <item android:id="@+id/voda"
+    <item
+        android:id="@+id/voda"
         android:title="@string/voda"
-        android:icon="@drawable/drop"></item>
+        android:icon="@drawable/drop" />
 
-    <item android:id="@+id/elektruka"
+    <item
+        android:id="@+id/elektruka"
         android:title="@string/elektruka"
-        android:icon="@drawable/flash"></item>
+        android:icon="@drawable/flash" />
+
 
     <item
-        android:id="@+id/settings"
-        android:icon="@drawable/settings_gears"
-        android:title="Settings" />
+        android:id="@+id/perekrutia"
+        android:title="@string/perekrutia"
+        android:icon="@drawable/road_perspective" />
+
     <item
-        android:icon="@drawable/notifications_button"
-        android:title="Notifications" />
+        android:id="@+id/wtorm"
+        android:title="@string/wtorm"
+        android:icon="@drawable/attention" />
+    <item
+        android:id="@+id/refresh"
+        android:title="Переглянути рівень води"
+        android:icon="@drawable/attention" />
+    <item android:title="Налаштування">
+        <menu>
+            <item
+                android:id="@+id/settings"
+                android:icon="@drawable/add"
+                android:title="Додати новину" />
+            <!--<item-->
+                <!--android:icon="@drawable/notifications_button"-->
+                <!--android:title="Сповіщення" />-->
+            <item
+                android:id="@+id/logOut"
+                android:title="Вихід"
+                android:icon="@drawable/logout" />
+        </menu>
+    </item>
 </menu>

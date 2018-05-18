@@ -3,12 +3,13 @@
     package="com.example.a37_1.e_advertisement">
 
     <!-- To auto-complete the email text field in the login form with the user's emails -->
+
+    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.READ_PROFILE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
 
     <application
-        android:name=".E_application"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -17,7 +18,7 @@
         android:theme="@style/AppTheme">
         <activity android:name=".DescriptionNewActivity" />
         <activity
-            android:name=".Admin_page"
+            android:name=".AdminPage"
             android:windowSoftInputMode="adjustResize" />
         <activity android:name=".MainActivity">
             <intent-filter>
@@ -26,13 +27,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".Login"
-            android:label="@string/title_activity_login" />
-        <activity
-            android:name=".Register"
-            android:label="@string/title_activity_register"
-            android:theme="@style/AppTheme"></activity>
+
     </application>
 
 </manifest>
