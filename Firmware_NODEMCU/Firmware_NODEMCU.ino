@@ -5,9 +5,9 @@
 char* ssid = "TP-Link_4G";                                          //info about to Wi-Fi && MQTT
 char* password =  "0322752762";
 char* mqttServer = "sheep.rmq.cloudamqp.com";
-int mqttPort = 8883;
+int mqttPort = 1883;
 char* mqttUser = "mxetqdmd:mxetqdmd";
-char* mqttPassword = "IHESbjw0ACljk2biVi5fa_zv36FUXKLL";  
+char* mqttPassword = "IHESbjw0ACljk2biVi5fa_zv36FUXKLL";
 
 #define LEVEL1 5                                                    //define ports
 #define LEVEL2 4
@@ -58,25 +58,25 @@ void loop() {
       if (digitalRead(LEVEL3) == 0 && digitalRead(LEVEL1) == 0 && digitalRead(LEVEL2) == 0) {
         digitalWrite(LEDPIN, HIGH);
         Serial.println("Level 3");
-        client.publish("bottle_Level/my_bottle", "Level 3");
+        client.publish("bottle_Level/my_bottle", "1 3");
                                                                       //send data to db that bottle filled with water on 99,9%
       }
       else {
         Serial.println("Level 2");
-        client.publish("bottle_Level/my_bottle", "Level 2");
+        client.publish("bottle_Level/my_bottle", "1 2");
                                                                       //send data to db that bottle filled with water on 66,6%
       }
     }
     else {
       Serial.println("Level 1");
-      client.publish("bottle_Level/my_bottle", "Level 1");
+      client.publish("bottle_Level/my_bottle", "1 1");
                                                                        //send data to db that bottle filled with water on 33,3%
     }
 
   }
   else {
     Serial.println("Bottle filled less than 33,3%");
-    client.publish("bottle_Level/my_bottle", "Bottle filled less than 33,3%");
+    client.publish("bottle_Level/my_bottle", "1 0");
   }
   client.loop();
   delay(5000);

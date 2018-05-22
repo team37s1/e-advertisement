@@ -12,8 +12,12 @@ def on_connect(client, userdata, flags, rc):
 
 
 def on_message(client, userdata, message):
-    print("Message received: " + message.payload.decode("utf-8"))
-
+    # print("Message received: " + message.payload.decode("utf-8"))
+    usersMessage = (message.payload.decode("utf-8")).split(" ")
+    id = usersMessage[0];
+    level = usersMessage[1];
+    print(id, level)
+    return id, level
 
 Connected = False  # global variable for the state of the connection
 
