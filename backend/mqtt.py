@@ -1,6 +1,6 @@
 import paho.mqtt.client as mqttClient
-import mysql_connector
 import time
+import mysql_connector
 
 
 def on_connect(client, userdata, flags, rc):

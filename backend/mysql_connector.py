@@ -136,14 +136,14 @@ def checklevel(id):
     return jsonify(res)
 
 
-#@app.route("/api/mcu/update_level&device_id=<id>", methods=["POST"])
+@app.route("/api/mcu/update_level&device_id=<id>", methods=["POST"])
 def uplevel(id, level):
     cursor = conn.cursor()
     get_level = """select smart_bottle.level  from smart_bottle
                 left join users on smart_bottle.Users_id = users.id
 				where smart_bottle.id = """ + id
     cursor.execute(get_level)
-    val = cursor.fetchone()
+    val = str(cursor.fetchone())
     time = "'" + now.strftime("%Y-%m-%d %H:%M") + "'"
 
     if str(val[0]) != str(level):
