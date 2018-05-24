@@ -1,5 +1,6 @@
 import paho.mqtt.client as mqttClient
 import time
+import mysql_connector
 
 
 def on_connect(client, userdata, flags, rc):
@@ -12,7 +13,12 @@ def on_connect(client, userdata, flags, rc):
 
 
 def on_message(client, userdata, message):
-    print("Message received: " + message.payload.decode("utf-8"))
+    # print("Message received: " + message.payload.decode("utf-8"))
+    usersMessage = (message.payload.decode("utf-8")).split(" ")
+    id = usersMessage[0]
+    level = usersMessage[1]
+    print(id, level)
+    return mysql_connector.uplevel(id, level)
 
 
 Connected = False  # global variable for the state of the connection

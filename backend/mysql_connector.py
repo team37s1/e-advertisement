@@ -137,26 +137,24 @@ def checklevel(id):
 
 
 @app.route("/api/mcu/update_level&device_id=<id>", methods=["POST"])
-def uplevel(id):
-    level = request.json['level']
-
+def uplevel(id, level):
     cursor = conn.cursor()
     get_level = """select smart_bottle.level  from smart_bottle
                 left join users on smart_bottle.Users_id = users.id
 				where smart_bottle.id = """ + id
     cursor.execute(get_level)
-    val = cursor.fetchone()
+    val = str(cursor.fetchone())
     time = "'" + now.strftime("%Y-%m-%d %H:%M") + "'"
 
     if str(val[0]) != str(level):
         cursor1 = conn.cursor()
-        cursor1.execute("UPDATE smart_bottle SET level=" + level + ", time=" + time+ " WHERE id=" + id)
+        cursor1.execute("UPDATE smart_bottle SET level=" + level + ", time=" + time + " WHERE id=" + id)
         cursor.execute("INSERT INTO history (smart_bottle_id , level, date)VALUES(%s, %s, %s)",
                        (id, level, time))
         conn.commit()
         return "Дані успішно оновллено"
     else:
-        return "Шось не так"
+        return 0
 
 
 if __name__ == "__main__":
