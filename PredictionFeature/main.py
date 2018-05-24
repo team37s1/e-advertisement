@@ -1,120 +1,88 @@
-%matplotlib inline
-
-import matplotlib.pylab as plt
-import pandas as pd
-import numpy as np
-
-
-from matplotlib.pylab import rcParams
-rcParams['figure.figsize'] = 15, 6
+from pandas import Series
+from matplotlib import pyplot
+from statsmodels.tsa.ar_model import AR
+from statsmodels.tsa.ar_model import ARResults
+from sklearn.metrics import mean_squared_error
+import numpy
 
 
-data = pd.read_csv('leveldata.csv')
-print data.head()
-print '\n Data Types:'
-print data.dtypes
-
-dateparse = lambda dates: pd.datetime.strptime(dates, '%Y-%m')
-data = pd.read_csv('leveldata.csv', parse_dates=['Date'], index_col='Date',date_parser=dateparse)
-print data.head()
-
-ts['2018-05-18' : '2018-05-24']
-
-plt.plot(ts)
+##################### PART1:READ AND TEST #####################
 
 
-from statsmodels.tsa.stattools import adfuller
-def test_stationarity(timeseries):
-    
-    #Determing rolling statistics
-    rolmean = pd.rolling_mean(timeseries, window=12)
-    rolstd = pd.rolling_std(timeseries, window=12)
+def difference(dataset):
+	diff = list()
+	for i in range(1, len(dataset)):
+		value = dataset[i] - dataset[i - 1]
+		diff.append(value)
+	return numpy.array(diff)
 
-    #Plot rolling statistics:
-    orig = plt.plot(timeseries, color='blue',label='Original')
-    mean = plt.plot(rolmean, color='red', label='Rolling Mean')
-    std = plt.plot(rolstd, color='black', label = 'Rolling Std')
-    plt.legend(loc='best')
-    plt.title('Rolling Mean & Standard Deviation')
-    plt.show(block=False)
-    
-    #Perform Dickey-Fuller test:
-    print 'Results of Dickey-Fuller Test:'
-    dftest = adfuller(timeseries, autolag='AIC')
-    dfoutput = pd.Series(dftest[0:4], index=['Test Statistic','p-value','#Lags Used','Number of Observations Used'])
-    for key,value in dftest[4].items():
-        dfoutput['Critical Value (%s)'%key] = value
-    print dfoutput
 
-test_stationarity(ts)
-    
-ts_log = np.log(ts)
-plt.plot(ts_log)
+def predict(coef, history):
+	yhat = coef[0]
+	for i in range(1, len(coef)):
+		yhat += coef[i] * history[-i]
+	return yhat
 
-moving_avg = pd.rolling_mean(ts_log,12)
-plt.plot(ts_log)
-plt.plot(moving_avg, color='red')
+series = Series.from_csv('leveldata.csv', header=0)
 
-ts_log_moving_avg_diff = ts_log - moving_avg
-ts_log_moving_avg_diff.head(12)
 
-ts_log_moving_avg_diff.dropna(inplace=True)
-test_stationarity(ts_log_moving_avg_diff)
+X = difference(series.values)
+size = int(len(X) * 0.66)
+train, test = X[0:size], X[size:]
 
-expwighted_avg = pd.ewma(ts_log, halflife=12)
-plt.plot(ts_log)
-plt.plot(expwighted_avg, color='red')
 
-ts_log_ewma_diff = ts_log - expwighted_avg
-test_stationarity(ts_log_ewma_diff)
+model = AR(train)
+model_fit = model.fit(maxlag=6, disp=False)
+window = model_fit.k_ar
+coef = model_fit.params
 
-ts_log_diff = ts_log - ts_log.shift()
-plt.plot(ts_log_diff)
 
-from statsmodels.tsa.seasonal import seasonal_decompose
-decomposition = seasonal_decompose(ts_log)
+history = [train[i] for i in range(len(train))]
+predictions = list()
+for t in range(len(test)):
+	yhat = predict(coef, history)
+	obs = test[t]
+	predictions.append(yhat)
+	history.append(obs)
+error = mean_squared_error(test, predictions)
+print('Test MSE: %.3f' % error)
 
-trend = decomposition.trend
-seasonal = decomposition.seasonal
-residual = decomposition.resid
 
-plt.subplot(411)
-plt.plot(ts_log, label='Original')
-plt.legend(loc='best')
-plt.subplot(412)
-plt.plot(trend, label='Trend')
-plt.legend(loc='best')
-plt.subplot(413)
-plt.plot(seasonal,label='Seasonality')
-plt.legend(loc='best')
-plt.subplot(414)
-plt.plot(residual, label='Residuals')
-plt.legend(loc='best')
-plt.tight_layout()
+pyplot.plot(test)
+pyplot.plot(predictions, color='red')
+pyplot.show()
 
-ts_log_decompose = residual
-ts_log_decompose.dropna(inplace=True)
-test_stationarity(ts_log_decompose)
 
-# ARIMA MODELING
-model = ARIMA(ts_log, order=(2, 1, 2))  
-results_ARIMA = model.fit(disp=-1)  
-plt.plot(ts_log_diff)
-plt.plot(results_ARIMA.fittedvalues, color='red')
-plt.title('RSS: %.4f'% sum((results_ARIMA.fittedvalues-ts_log_diff)**2))
+##################### PART2:SAVE #####################
 
-predictions_ARIMA_diff = pd.Series(results_ARIMA.fittedvalues, copy=True)
-print predictions_ARIMA_diff.head()
 
-predictions_ARIMA_diff_cumsum = predictions_ARIMA_diff.cumsum()
-print predictions_ARIMA_diff_cumsum.head()
+series = Series.from_csv('leveldata.csv', header=0)
+X = difference(series.values)
 
-predictions_ARIMA_log = pd.Series(ts_log.ix[0], index=ts_log.index)
-predictions_ARIMA_log = predictions_ARIMA_log.add(predictions_ARIMA_diff_cumsum,fill_value=0)
-predictions_ARIMA_log.head()
 
-predictions_ARIMA = np.exp(predictions_ARIMA_log)
-plt.plot(ts)
-plt.plot(predictions_ARIMA)
-plt.title('RMSE: %.4f'% np.sqrt(sum((predictions_ARIMA-ts)**2)/len(ts)))
+model = AR(X)
+model_fit = model.fit(maxlag=6, disp=False)
 
+
+model_fit.save('ar_model.pkl')
+
+
+numpy.save('ar_data.npy', X)
+
+
+numpy.save('ar_obs.npy', [series.values[-1]])
+
+
+##################### PART3:LOAD AND PREDICT #####################
+
+
+model = ARResults.load('ar_model.pkl')
+data = numpy.load('ar_data.npy')
+last_ob = numpy.load('ar_obs.npy')
+
+
+predictions = model.predict(start=len(data), end=len(data))
+
+
+yhat = predictions[0] + last_ob[0]
+print('Prediction: %f' % yhat)
